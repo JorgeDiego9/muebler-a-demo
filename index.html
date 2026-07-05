@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ROBLE — Muebles hechos para durar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Work+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --c-white:#FAF8F5;
+    --c-cream:#EFE9E1;
+    --c-charcoal:#2B2A28;
+    --c-charcoal-soft:#43413d;
+    --c-wood-light:#B98D62;
+    --c-wood-dark:#6B4A32;
+    --c-green:#3F4B3A;
+    --c-line: rgba(43,42,40,0.14);
+    --ease: cubic-bezier(.22,.61,.36,1);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--c-white);
+    color:var(--c-charcoal);
+    font-family:'Work Sans', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{display:block;max-width:100%;}
+  a{color:inherit;text-decoration:none;}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;}
+  ::selection{background:var(--c-wood-light); color:var(--c-white);}
+
+  .display{font-family:'Fraunces', serif;}
+  .mono{font-family:'Space Mono', monospace;}
+  .eyebrow{
+    font-family:'Space Mono', monospace;
+    font-size:.72rem;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--c-wood-dark);
+    display:inline-flex;
+    align-items:center;
+    gap:.5rem;
+  }
+  .eyebrow::before{
+    content:'';
+    width:18px;height:1px;
+    background:var(--c-wood-dark);
+    display:inline-block;
+  }
+  .wrap{
+    max-width:1200px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+  section{ padding:120px 0; }
+  @media (max-width:768px){
+    section{ padding:80px 0; }
+    .wrap{ padding:0 20px; }
+  }
+
+  /* reveal on scroll */
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .8s var(--ease), transform .8s var(--ease);}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0;
+    z-index:100;
+    padding:26px 0;
+    transition:padding .4s var(--ease), background .4s var(--ease), box-shadow .4s var(--ease);
+  }
+  header.scrolled{
+    padding:16px 0;
+    background:rgba(250,248,245,0.92);
+    -webkit-backdrop-filter:blur(10px);
+    backdrop-filter:blur(10px);
+    box-shadow:0 1px 0 var(--c-line);
+  }
+  .nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .logo{
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    font-size:1.5rem;
+    letter-spacing:.02em;
+  }
+  .logo em{ color:var(--c-wood-dark); font-style:italic; }
+  .nav-links{
+    display:flex;
+    gap:36px;
+    list-style:none;
+    font-size:.92rem;
+  }
+  .nav-links a{
+    position:relative;
+    padding-bottom:4px;
+  }
+  .nav-links a::after{
+    content:'';
+    position:absolute; left:0; bottom:0;
+    width:0; height:1px;
+    background:var(--c-charcoal);
+    transition:width .3s var(--ease);
+  }
+  .nav-links a:hover::after{ width:100%; }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:12px 22px;
+    border-radius:2px;
+    font-size:.88rem;
+    font-weight:500;
+    transition:transform .3s var(--ease), background .3s var(--ease);
+  }
+  .btn-dark{
+    background:var(--c-charcoal);
+    color:var(--c-white);
+  }
+  .btn-dark:hover{ background:var(--c-wood-dark); transform:translateY(-2px); }
+  .btn-outline{
+    border:1px solid var(--c-charcoal);
+  }
+  .btn-outline:hover{ background:var(--c-charcoal); color:var(--c-white); }
+  .nav-toggle{ display:none; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:190px 0 0;
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1fr .85fr;
+    gap:60px;
+    align-items:center;
+  }
+  .hero h1{
+    font-size:clamp(2.6rem, 5vw, 4.4rem);
+    font-weight:600;
+    line-height:1.05;
+    letter-spacing:-.01em;
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--c-wood-dark);
+    font-weight:400;
+  }
+  .hero p.lead{
+    margin-top:26px;
+    max-width:440px;
+    font-size:1.05rem;
+    color:var(--c-charcoal-soft);
+  }
+  .hero-actions{
+    margin-top:38px;
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .hero-figure{
+    position:relative;
+  }
+  .hero-figure .frame{
+    position:absolute;
+    inset:-16px -16px auto auto;
+    top:-18px; right:-18px;
+    width:100%; height:100%;
+    border:1px solid var(--c-wood-light);
+    z-index:0;
+  }
+  .hero-figure .photo{
+    position:relative;
+    z-index:1;
+    aspect-ratio:4/5;
+    overflow:hidden;
+    background:var(--c-charcoal);
+  }
+  .img-fallback{
+    display:flex; align-items:flex-end;
+    background:linear-gradient(150deg, var(--c-wood-light), var(--c-wood-dark));
+    height:100%; width:100%;
+    padding:18px;
+  }
+  .img-fallback span{
+    font-family:'Space Mono', monospace;
+    font-size:.72rem;
+    letter-spacing:.08em;
+    color:rgba(255,255,255,.85);
+    text-transform:uppercase;
+  }
+  .photo img, .photo{ width:100%; height:100%; object-fit:cover; }
+
+  /* ---------- MARQUEE ---------- */
+  .marquee-strip{
+    background:var(--c-charcoal);
+    color:var(--c-cream);
+    overflow:hidden;
+    padding:18px 0;
+    margin-top:100px;
+    white-space:nowrap;
+  }
+  .marquee-track{
+    display:inline-flex;
+    animation:scroll-left 32s linear infinite;
+  }
+  .marquee-track span{
+    font-family:'Space Mono', monospace;
+    font-size:.85rem;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    padding:0 28px;
+    display:inline-flex;
+    align-items:center;
+    gap:28px;
+  }
+  .marquee-track span::after{ content:'◆'; font-size:.6rem; color:var(--c-wood-light); }
+  @keyframes scroll-left{
+    from{ transform:translateX(0); }
+    to{ transform:translateX(-50%); }
+  }
+
+  /* ---------- CATALOG ---------- */
+  .cat-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    flex-wrap:wrap;
+    gap:24px;
+    margin-bottom:50px;
+  }
+  .cat-head h2{
+    font-size:clamp(2rem, 3.4vw, 2.8rem);
+    font-weight:500;
+    max-width:560px;
+    margin-top:14px;
+  }
+  .filters{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .filter-btn{
+    padding:9px 18px;
+    font-size:.82rem;
+    font-family:'Space Mono', monospace;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    border:1px solid var(--c-line);
+    border-radius:20px;
+    color:var(--c-charcoal-soft);
+    transition:all .3s var(--ease);
+  }
+  .filter-btn:hover{ border-color:var(--c-charcoal); }
+  .filter-btn.active{
+    background:var(--c-charcoal);
+    color:var(--c-white);
+    border-color:var(--c-charcoal);
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:2px;
+    background:var(--c-line);
+  }
+  @media (max-width:900px){ .grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:560px){ .grid{ grid-template-columns:1fr; } }
+
+  .card{
+    background:var(--c-white);
+    position:relative;
+    transition:opacity .4s var(--ease), transform .4s var(--ease);
+  }
+  .card.hide{
+    display:none;
+  }
+  .card-figure{
+    aspect-ratio:1/1;
+    overflow:hidden;
+    position:relative;
+  }
+  .card-figure img{
+    width:100%; height:100%; object-fit:cover;
+    transition:transform .6s var(--ease);
+  }
+  .card:hover .card-figure img{ transform:scale(1.06); }
+  .card-figure .img-fallback{ align-items:center; justify-content:center; }
+  .card-figure .img-fallback span{ font-size:.68rem; }
+
+  .card-spec{
+    position:absolute; inset:0;
+    background:rgba(43,42,40,.86);
+    color:var(--c-cream);
+    display:flex; flex-direction:column; justify-content:flex-end;
+    padding:18px;
+    opacity:0;
+    transition:opacity .35s var(--ease);
+  }
+  .card:hover .card-spec{ opacity:1; }
+  .card-spec .mono{ font-size:.72rem; letter-spacing:.05em; opacity:.85; margin-bottom:4px;}
+
+  .card-info{
+    padding:20px 22px 26px;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:10px;
+  }
+  .card-info h3{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:1.12rem;
+  }
+  .card-info .tag{
+    font-family:'Space Mono', monospace;
+    font-size:.68rem;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--c-wood-dark);
+    display:block;
+    margin-top:4px;
+  }
+  .card-info .price{
+    font-family:'Space Mono', monospace;
+    font-weight:700;
+    font-size:.95rem;
+    white-space:nowrap;
+  }
+
+  /* ---------- PROCESO ---------- */
+  .proceso{
+    background:var(--c-cream);
+  }
+  .proceso-grid{
+    display:grid;
+    grid-template-columns:.9fr 1.1fr;
+    gap:70px;
+    align-items:center;
+  }
+  @media (max-width:860px){ .proceso-grid{ grid-template-columns:1fr; gap:40px;} }
+  .proceso-figure{
+    aspect-ratio:4/5;
+    overflow:hidden;
+  }
+  .proceso-figure img{ width:100%; height:100%; object-fit:cover; }
+  .proceso h2{
+    font-size:clamp(1.9rem,3vw,2.5rem);
+    font-weight:500;
+    margin:14px 0 24px;
+    max-width:460px;
+  }
+  .steps{ display:flex; flex-direction:column; }
+  .step{
+    display:grid;
+    grid-template-columns:56px 1fr;
+    gap:20px;
+    padding:22px 0;
+    border-top:1px solid var(--c-line);
+  }
+  .step:first-child{ border-top:1px solid var(--c-line); }
+  .step .n{
+    font-family:'Space Mono', monospace;
+    font-size:.85rem;
+    color:var(--c-wood-dark);
+    padding-top:3px;
+  }
+  .step h4{ font-family:'Fraunces', serif; font-weight:500; font-size:1.08rem; margin-bottom:6px;}
+  .step p{ color:var(--c-charcoal-soft); font-size:.94rem; max-width:420px;}
+
+  /* ---------- TESTIMONIOS ---------- */
+  .testi-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--c-line);
+    margin-top:50px;
+  }
+  @media (max-width:860px){ .testi-grid{ grid-template-columns:1fr; } }
+  .testi{
+    background:var(--c-white);
+    padding:40px 34px;
+  }
+  .testi .stars{ color:var(--c-wood-dark); font-size:.85rem; letter-spacing:2px; margin-bottom:18px;}
+  .testi p{ font-family:'Fraunces', serif; font-style:italic; font-size:1.08rem; line-height:1.5; color:var(--c-charcoal-soft);}
+  .testi .who{ margin-top:20px; font-family:'Space Mono', monospace; font-size:.75rem; letter-spacing:.05em; text-transform:uppercase; color:var(--c-charcoal); }
+
+  /* ---------- CONTACTO ---------- */
+  .contacto{ background:var(--c-charcoal); color:var(--c-white); }
+  .contacto .eyebrow{ color:var(--c-wood-light); }
+  .contacto .eyebrow::before{ background:var(--c-wood-light); }
+  .contacto h2{ font-size:clamp(2rem,3.4vw,2.8rem); font-weight:500; margin:14px 0 20px; max-width:520px;}
+  .contacto-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:70px;
+    margin-top:50px;
+  }
+  @media (max-width:860px){ .contacto-grid{ grid-template-columns:1fr; gap:40px; } }
+  .info-list{ list-style:none; margin-top:30px; }
+  .info-list li{
+    padding:16px 0;
+    border-top:1px solid rgba(250,248,245,.14);
+    display:grid;
+    grid-template-columns:110px 1fr;
+    gap:16px;
+    font-size:.94rem;
+  }
+  .info-list li:last-child{ border-bottom:1px solid rgba(250,248,245,.14); }
+  .info-list .k{ font-family:'Space Mono', monospace; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--c-wood-light); }
+
+  .form-field{ margin-bottom:18px; }
+  .form-field label{ display:block; font-family:'Space Mono', monospace; font-size:.7rem; letter-spacing:.06em; text-transform:uppercase; margin-bottom:8px; color:rgba(250,248,245,.7); }
+  .form-field input, .form-field textarea{
+    width:100%;
+    background:transparent;
+    border:none;
+    border-bottom:1px solid rgba(250,248,245,.3);
+    padding:10px 2px;
+    color:var(--c-white);
+    font-family:'Work Sans', sans-serif;
+    font-size:.98rem;
+    transition:border-color .3s;
+  }
+  .form-field input:focus, .form-field textarea:focus{
+    outline:none;
+    border-bottom-color:var(--c-wood-light);
+  }
+  .form-field textarea{ resize:vertical; min-height:80px; }
+  .form-note{
+    margin-top:16px;
+    font-size:.82rem;
+    color:var(--c-wood-light);
+    display:none;
+  }
+  .form-note.show{ display:block; }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    padding:40px 0;
+    border-top:1px solid var(--c-line);
+  }
+  .foot-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:14px;
+    font-size:.82rem;
+    color:var(--c-charcoal-soft);
+  }
+  .foot-row .logo{ font-size:1.1rem; }
+
+  @media (max-width:768px){
+    .hero-grid{ grid-template-columns:1fr; }
+    .hero{ padding-top:150px; }
+    .nav-links{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="wrap nav">
+    <a href="#" class="logo"><em>RO</em>BLE</a>
+    <ul class="nav-links">
+      <li><a href="#catalogo">Colección</a></li>
+      <li><a href="#proceso">Proceso</a></li>
+      <li><a href="#testimonios">Testimonios</a></li>
+      <li><a href="#contacto">Visítanos</a></li>
+    </ul>
+    <a href="#contacto" class="btn btn-dark">Agenda una visita</a>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="reveal in">
+        <span class="eyebrow">Taller de carpintería · Est. 2011</span>
+        <h1 class="display">Muebles con <em>carácter</em>,<br>hechos para durar.</h1>
+        <p class="lead">Diseñamos y construimos pieza por pieza con maderas macizas de la región. Sin prisas, sin relleno: solo madera, forma y tiempo bien invertido.</p>
+        <div class="hero-actions">
+          <a href="#catalogo" class="btn btn-dark">Ver colección</a>
+          <a href="#proceso" class="btn btn-outline">Cómo trabajamos</a>
+        </div>
+      </div>
+      <div class="hero-figure reveal in">
+        <div class="frame"></div>
+        <div class="photo">
+          <img src="mueble1.jpg" alt="Sofá modular Tulum" onerror="this.parentElement.classList.add('img-fallback'); this.remove()">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="marquee-strip">
+    <div class="marquee-track">
+      <span>Roble macizo</span><span>Nogal</span><span>Encino</span><span>Hecho a mano</span><span>Garantía 10 años</span><span>Madera certificada</span>
+      <span>Roble macizo</span><span>Nogal</span><span>Encino</span><span>Hecho a mano</span><span>Garantía 10 años</span><span>Madera certificada</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CATALOGO ================= -->
+<section id="catalogo">
+  <div class="wrap">
+    <div class="cat-head">
+      <div class="reveal">
+        <span class="eyebrow">Colección 2026</span>
+        <h2 class="display">Cada pieza cuenta<br>una historia de taller.</h2>
+      </div>
+      <div class="filters reveal">
+        <button class="filter-btn active" data-filter="todos">Todos</button>
+        <button class="filter-btn" data-filter="sala">Sala</button>
+        <button class="filter-btn" data-filter="comedor">Comedor</button>
+        <button class="filter-btn" data-filter="recamara">Recámara</button>
+        <button class="filter-btn" data-filter="accesorios">Accesorios</button>
+      </div>
+    </div>
+
+    <div class="grid" id="catalogGrid"></div>
+  </div>
+</section>
+
+<!-- ================= PROCESO ================= -->
+<section id="proceso" class="proceso">
+  <div class="wrap">
+    <div class="proceso-grid">
+      <div class="proceso-figure reveal">
+        <img src="mueble2.jpg" alt="Detalle de mesa de encino" onerror="this.parentElement.classList.add('img-fallback'); this.remove()">
+      </div>
+      <div class="reveal">
+        <span class="eyebrow">De la troza a tu casa</span>
+        <h2 class="display">Tres pasos, ningún atajo.</h2>
+        <div class="steps">
+          <div class="step">
+            <span class="n mono">01</span>
+            <div>
+              <h4>Selección de madera</h4>
+              <p>Elegimos trozas de roble, nogal y encino de proveedores forestales certificados, revisando veta y humedad una por una.</p>
+            </div>
+          </div>
+          <div class="step">
+            <span class="n mono">02</span>
+            <div>
+              <h4>Ensamblaje artesanal</h4>
+              <p>Cada unión se corta y ensambla a mano en nuestro taller, sin tornillería vista ni prensados industriales.</p>
+            </div>
+          </div>
+          <div class="step">
+            <span class="n mono">03</span>
+            <div>
+              <h4>Acabado natural</h4>
+              <p>Sellamos con aceites naturales que resaltan la veta y protegen la pieza para generaciones de uso.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TESTIMONIOS ================= -->
+<section id="testimonios">
+  <div class="wrap">
+    <div class="reveal" style="text-align:center;">
+      <span class="eyebrow" style="justify-content:center;">Lo que dicen nuestros clientes</span>
+      <h2 class="display" style="font-size:clamp(1.9rem,3vw,2.5rem); font-weight:500; margin-top:14px;">Piezas que se quedan en la familia</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi reveal">
+        <div class="stars">★★★★★</div>
+        <p>“La mesa de encino que hicieron para nuestro comedor es la primera cosa que la gente pregunta cuando entra a la casa.”</p>
+        <div class="who">Renata O. — Guadalajara</div>
+      </div>
+      <div class="testi reveal">
+        <div class="stars">★★★★★</div>
+        <p>“Pedimos un closet a medida y llegó exacto a los milímetros que necesitábamos. Cero relleno, todo funcional.”</p>
+        <div class="who">Julián M. — Zapopan</div>
+      </div>
+      <div class="testi reveal">
+        <div class="stars">★★★★★</div>
+        <p>“Tres años con el sofá Tulum y sigue como el primer día. Se nota que no es mueble de aglomerado.”</p>
+        <div class="who">Carla D. — Ocotlán</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACTO ================= -->
+<section id="contacto" class="contacto">
+  <div class="wrap">
+    <div class="contacto-grid">
+      <div class="reveal">
+        <span class="eyebrow">Visítanos</span>
+        <h2 class="display">Ven a tocar la madera<br>antes de decidir.</h2>
+        <p style="max-width:420px; color:rgba(250,248,245,.75);">Nuestra sala de exhibición está abierta toda la semana. Sin cita para visitas rápidas, con cita para asesoría de proyectos a medida.</p>
+        <ul class="info-list">
+          <li><span class="k">Dirección</span><span>Av. de los Encinos 214, Col. Las Fuentes, Ocotlán, Jalisco</span></li>
+          <li><span class="k">Horario</span><span>Lun–Vie 10:00–19:00 · Sáb 10:00–15:00</span></li>
+          <li><span class="k">Teléfono</span><span>(392) 555 0148</span></li>
+          <li><span class="k">Correo</span><span>hola@roble-muebles.mx</span></li>
+        </ul>
+      </div>
+      <div class="reveal">
+        <form id="contactForm">
+          <div class="form-field">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" required placeholder="¿Cómo te llamas?">
+          </div>
+          <div class="form-field">
+            <label for="correo">Correo</label>
+            <input type="email" id="correo" required placeholder="tu@correo.com">
+          </div>
+          <div class="form-field">
+            <label for="mensaje">Cuéntanos tu proyecto</label>
+            <textarea id="mensaje" required placeholder="Espacio, medidas aproximadas, estilo que buscas..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-dark" style="margin-top:8px;">Enviar mensaje</button>
+          <p class="form-note" id="formNote">Gracias — es una página de demostración, así que este formulario no envía datos reales todavía.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <a href="#" class="logo"><em>RO</em>BLE</a>
+    <span>© 2026 Roble Muebles. Página de demostración — información ficticia.</span>
+    <span>Ocotlán, Jalisco · México</span>
+  </div>
+</footer>
+
+<script>
+  // ---- Datos del catálogo (ficticios) ----
+  const productos = [
+    { img:'mueble1.jpg',  nombre:'Sofá modular Tulum',   cat:'sala',       tag:'Roble macizo',            precio:'$28,400', dim:'240 × 95 × 80 cm' },
+    { img:'mueble2.jpg',  nombre:'Mesa Encino Vivo',      cat:'comedor',    tag:'Encino',                  precio:'$34,900', dim:'200 × 95 × 76 cm' },
+    { img:'mueble3.jpg',  nombre:'Cama Nómade',           cat:'recamara',   tag:'Nogal',                   precio:'$22,600', dim:'160 × 200 cm' },
+    { img:'mueble4.jpg',  nombre:'Sillón Aurora',         cat:'sala',       tag:'Roble',                   precio:'$14,200', dim:'85 × 90 × 95 cm' },
+    { img:'mueble5.jpg',  nombre:'Set de sillas Junco',   cat:'comedor',    tag:'Bambú y roble · x4',      precio:'$18,800', dim:'45 × 55 × 88 cm c/u' },
+    { img:'mueble6.jpg',  nombre:'Buró Cobre',            cat:'accesorios', tag:'Nogal con detalle cobre', precio:'$6,300',  dim:'45 × 40 × 55 cm' },
+    { img:'mueble7.jpg',  nombre:'Closet Alba',           cat:'recamara',   tag:'Encino',                  precio:'$41,500', dim:'180 × 60 × 220 cm' },
+    { img:'mueble8.jpg',  nombre:'Mesa de centro Deriva', cat:'sala',       tag:'Roble reciclado',         precio:'$9,750',  dim:'110 × 60 × 40 cm' },
+    { img:'mueble9.jpg',  nombre:'Vitrina Ocote',         cat:'comedor',    tag:'Ocote',                   precio:'$26,300', dim:'120 × 45 × 190 cm' },
+    { img:'mueble10.jpg', nombre:'Espejo Luna',           cat:'accesorios', tag:'Marco de nogal',          precio:'$5,400',  dim:'70 × 90 cm' },
+  ];
+
+  const catLabel = { sala:'Sala', comedor:'Comedor', recamara:'Recámara', accesorios:'Accesorios' };
+
+  const grid = document.getElementById('catalogGrid');
+  grid.innerHTML = productos.map((p, i) => `
+    <div class="card reveal" data-cat="${p.cat}" style="transition-delay:${(i % 3) * 60}ms">
+      <div class="card-figure">
+        <img src="${p.img}" alt="${p.nombre}" onerror="this.parentElement.classList.add('img-fallback'); this.outerHTML='<span>'+ '${p.img}'.toUpperCase() +'</span>'">
+        <div class="card-spec">
+          <span class="mono">${p.tag}</span>
+          <span class="mono">${p.dim}</span>
+        </div>
+      </div>
+      <div class="card-info">
+        <div>
+          <h3>${p.nombre}</h3>
+          <span class="tag">${catLabel[p.cat]}</span>
+        </div>
+        <span class="price mono">${p.precio}</span>
+      </div>
+    </div>
+  `).join('');
+
+  // ---- Filtros ----
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      document.querySelectorAll('.card').forEach(card => {
+        const match = f === 'todos' || card.dataset.cat === f;
+        card.classList.toggle('hide', !match);
+      });
+    });
+  });
+
+  // ---- Header al hacer scroll ----
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // ---- Revelado al hacer scroll ----
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('in');
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ---- Formulario de contacto (demo, sin envío real) ----
+  document.getElementById('contactForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    document.getElementById('formNote').classList.add('show');
+  });
+</script>
+
+</body>
+</html>
