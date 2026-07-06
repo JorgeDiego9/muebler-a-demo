@@ -934,122 +934,153 @@
   // Reemplaza estos dos valores con los de tu propio proyecto Supabase:
   // Settings → API → Project URL / anon public key
   // ==================================================================
-  const SUPABASE_URL = 'https://ghcvqyuoscyfbuhxosjq.supabase.co/rest/v1/';
-  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdoY3ZxeXVvc2N5ZmJ1aHhvc2pxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMzMDUwODksImV4cCI6MjA5ODg4MTA4OX0.RXYpw12Gb1rrBAq3ChyrhQBLPjz0rCgqzwBqeJCTcPA';
-  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  try {
+    const SUPABASE_URL = 'https://ghcvqyuoscyfbuhxosjq.supabase.co/rest/v1/';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdoY3ZxeXVvc2N5ZmJ1aHhvc2pxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMzMDUwODksImV4cCI6MjA5ODg4MTA4OX0.RXYpw12Gb1rrBAq3ChyrhQBLPjz0rCgqzwBqeJCTcPA';
 
-  // ---- Formulario de contacto: guarda el mensaje en la base de datos ----
-  document.getElementById('contactForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const btn = e.target.querySelector('button[type="submit"]');
-    const note = document.getElementById('formNote');
-    const nombre = document.getElementById('nombre').value.trim();
-    const correo = document.getElementById('correo').value.trim();
-    const mensaje = document.getElementById('mensaje').value.trim();
-
-    btn.disabled = true;
-    btn.textContent = 'Enviando...';
-
-    const { error } = await supabase.from('mensajes').insert([{ nombre, correo, mensaje }]);
-
-    if (error) {
-      note.textContent = 'Hubo un problema al enviar tu mensaje. Intenta de nuevo en un momento.';
-    } else {
-      note.textContent = `Gracias, ${nombre.split(' ')[0]} — tu mensaje quedó guardado y te contactaremos pronto.`;
-      e.target.reset();
+    if (typeof window.supabase === 'undefined') {
+      throw new Error('El script de Supabase no cargó (revisa tu conexión o bloqueador de anuncios).');
     }
-    note.classList.add('show');
-    btn.disabled = false;
-    btn.textContent = 'Enviar mensaje';
-  });
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-  // ---- Abrir panel: revisa si ya hay sesión iniciada ----
-  document.getElementById('openPanel').addEventListener('click', async (e) => {
-    e.preventDefault();
-    document.getElementById('panelOverlay').classList.add('open');
-    const { data } = await supabase.auth.getSession();
-    if (data.session) {
-      mostrarPanel();
-      cargarMensajes();
-    } else {
+    // ---- Formulario de contacto: guarda el mensaje en la base de datos ----
+    document.getElementById('contactForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = e.target.querySelector('button[type="submit"]');
+      const note = document.getElementById('formNote');
+      const nombre = document.getElementById('nombre').value.trim();
+      const correo = document.getElementById('correo').value.trim();
+      const mensaje = document.getElementById('mensaje').value.trim();
+
+      btn.disabled = true;
+      btn.textContent = 'Enviando...';
+
+      try {
+        const { error } = await supabase.from('mensajes').insert([{ nombre, correo, mensaje }]);
+        if (error) throw error;
+        note.textContent = `Gracias, ${nombre.split(' ')[0]} — tu mensaje quedó guardado y te contactaremos pronto.`;
+        e.target.reset();
+      } catch (err) {
+        console.error('Error al guardar mensaje:', err);
+        note.textContent = 'Hubo un problema al enviar tu mensaje. Intenta de nuevo en un momento.';
+      }
+      note.classList.add('show');
+      btn.disabled = false;
+      btn.textContent = 'Enviar mensaje';
+    });
+
+    // ---- Abrir panel: revisa si ya hay sesión iniciada ----
+    document.getElementById('openPanel').addEventListener('click', async (e) => {
+      e.preventDefault();
+      document.getElementById('panelOverlay').classList.add('open');
+      try {
+        const { data } = await supabase.auth.getSession();
+        if (data.session) {
+          mostrarPanel();
+          cargarMensajes();
+        } else {
+          mostrarLogin();
+        }
+      } catch (err) {
+        console.error('Error revisando sesión:', err);
+        mostrarLogin();
+      }
+    });
+
+    document.getElementById('closePanel').addEventListener('click', () => {
+      document.getElementById('panelOverlay').classList.remove('open');
+    });
+    document.getElementById('panelOverlay').addEventListener('click', (e) => {
+      if (e.target.id === 'panelOverlay') e.target.classList.remove('open');
+    });
+
+    function mostrarLogin(){
+      document.getElementById('loginBox').style.display = 'block';
+      document.getElementById('panelContent').style.display = 'none';
+    }
+    function mostrarPanel(){
+      document.getElementById('loginBox').style.display = 'none';
+      document.getElementById('panelContent').style.display = 'block';
+    }
+
+    // ---- Login del administrador ----
+    document.getElementById('loginBtn').addEventListener('click', async () => {
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value;
+      const errorEl = document.getElementById('loginError');
+
+      try {
+        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        if (error) throw error;
+        errorEl.classList.remove('show');
+        mostrarPanel();
+        cargarMensajes();
+      } catch (err) {
+        console.error('Error de login:', err);
+        errorEl.classList.add('show');
+      }
+    });
+
+    document.getElementById('logoutBtn').addEventListener('click', async () => {
+      await supabase.auth.signOut();
       mostrarLogin();
+    });
+
+    // ---- Cargar y mostrar mensajes (solo si hay sesión) ----
+    async function cargarMensajes(){
+      try {
+        const { data, error } = await supabase
+          .from('mensajes')
+          .select('*')
+          .order('fecha', { ascending: false });
+        if (error) throw error;
+        renderPanel(data || []);
+      } catch (err) {
+        console.error('Error cargando mensajes:', err);
+      }
     }
-  });
 
-  document.getElementById('closePanel').addEventListener('click', () => {
-    document.getElementById('panelOverlay').classList.remove('open');
-  });
-  document.getElementById('panelOverlay').addEventListener('click', (e) => {
-    if (e.target.id === 'panelOverlay') e.target.classList.remove('open');
-  });
+    function renderPanel(lista){
+      const hoy = new Date().toDateString();
+      document.getElementById('statTotal').textContent = lista.length;
+      document.getElementById('statNuevos').textContent = lista.filter(m => m.estado === 'nuevo').length;
+      document.getElementById('statHoy').textContent = lista.filter(m => new Date(m.fecha).toDateString() === hoy).length;
+      document.getElementById('panelEmpty').style.display = lista.length ? 'none' : 'block';
 
-  function mostrarLogin(){
-    document.getElementById('loginBox').style.display = 'block';
-    document.getElementById('panelContent').style.display = 'none';
-  }
-  function mostrarPanel(){
-    document.getElementById('loginBox').style.display = 'none';
-    document.getElementById('panelContent').style.display = 'block';
-  }
-
-  // ---- Login del administrador ----
-  document.getElementById('loginBtn').addEventListener('click', async () => {
-    const email = document.getElementById('loginEmail').value.trim();
-    const password = document.getElementById('loginPassword').value;
-    const errorEl = document.getElementById('loginError');
-
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) {
-      errorEl.classList.add('show');
-      return;
+      document.getElementById('panelBody').innerHTML = lista.map(m => `
+        <tr>
+          <td class="mono">${new Date(m.fecha).toLocaleDateString('es-MX', { day:'2-digit', month:'short' })}</td>
+          <td>${m.nombre}</td>
+          <td>${m.correo}</td>
+          <td class="msg">${m.mensaje}</td>
+          <td><span class="badge ${m.estado}" data-id="${m.id}">${m.estado === 'nuevo' ? 'Nuevo' : 'Atendido'}</span></td>
+        </tr>
+      `).join('');
     }
-    errorEl.classList.remove('show');
-    mostrarPanel();
-    cargarMensajes();
-  });
 
-  document.getElementById('logoutBtn').addEventListener('click', async () => {
-    await supabase.auth.signOut();
-    mostrarLogin();
-  });
+    // ---- Cambiar estado de un mensaje (Nuevo / Atendido) ----
+    document.getElementById('panelBody').addEventListener('click', async (e) => {
+      if (!e.target.classList.contains('badge')) return;
+      const id = e.target.dataset.id;
+      const nuevoEstado = e.target.textContent.trim() === 'Nuevo' ? 'atendido' : 'nuevo';
+      try {
+        await supabase.from('mensajes').update({ estado: nuevoEstado }).eq('id', id);
+        cargarMensajes();
+      } catch (err) {
+        console.error('Error actualizando mensaje:', err);
+      }
+    });
 
-  // ---- Cargar y mostrar mensajes (solo si hay sesión) ----
-  async function cargarMensajes(){
-    const { data, error } = await supabase
-      .from('mensajes')
-      .select('*')
-      .order('fecha', { ascending: false });
-
-    if (error) { console.error(error); return; }
-    renderPanel(data || []);
+  } catch (err) {
+    console.error('No se pudo inicializar el panel de administrador:', err);
+    const openPanelLink = document.getElementById('openPanel');
+    if (openPanelLink) {
+      openPanelLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        alert('El panel de administrador aún no está configurado con tu base de datos.');
+      });
+    }
   }
-
-  function renderPanel(lista){
-    const hoy = new Date().toDateString();
-    document.getElementById('statTotal').textContent = lista.length;
-    document.getElementById('statNuevos').textContent = lista.filter(m => m.estado === 'nuevo').length;
-    document.getElementById('statHoy').textContent = lista.filter(m => new Date(m.fecha).toDateString() === hoy).length;
-    document.getElementById('panelEmpty').style.display = lista.length ? 'none' : 'block';
-
-    document.getElementById('panelBody').innerHTML = lista.map(m => `
-      <tr>
-        <td class="mono">${new Date(m.fecha).toLocaleDateString('es-MX', { day:'2-digit', month:'short' })}</td>
-        <td>${m.nombre}</td>
-        <td>${m.correo}</td>
-        <td class="msg">${m.mensaje}</td>
-        <td><span class="badge ${m.estado}" data-id="${m.id}">${m.estado === 'nuevo' ? 'Nuevo' : 'Atendido'}</span></td>
-      </tr>
-    `).join('');
-  }
-
-  // ---- Cambiar estado de un mensaje (Nuevo / Atendido) ----
-  document.getElementById('panelBody').addEventListener('click', async (e) => {
-    if (!e.target.classList.contains('badge')) return;
-    const id = e.target.dataset.id;
-    const nuevoEstado = e.target.textContent.trim() === 'Nuevo' ? 'atendido' : 'nuevo';
-    await supabase.from('mensajes').update({ estado: nuevoEstado }).eq('id', id);
-    cargarMensajes();
-  });
 </script>
 
 </body>
