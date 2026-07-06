@@ -575,6 +575,48 @@
     color:var(--c-charcoal-soft);
   }
 
+  .login-box{
+    padding:44px 32px 40px;
+    max-width:340px;
+    margin:0 auto;
+    text-align:center;
+  }
+  .login-box h4{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:1.2rem;
+    margin:12px 0 26px;
+  }
+  .form-field-light{ margin-bottom:16px; text-align:left; }
+  .form-field-light label{
+    display:block;
+    font-family:'Space Mono', monospace;
+    font-size:.68rem;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    margin-bottom:7px;
+    color:var(--c-charcoal-soft);
+  }
+  .form-field-light input{
+    width:100%;
+    background:transparent;
+    border:none;
+    border-bottom:1px solid var(--c-line);
+    padding:9px 2px;
+    color:var(--c-charcoal);
+    font-family:'Work Sans', sans-serif;
+    font-size:.95rem;
+  }
+  .form-field-light input:focus{ outline:none; border-bottom-color:var(--c-wood-dark); }
+  .login-box .btn{ width:100%; justify-content:center; margin-top:6px; }
+  .login-error{
+    display:none;
+    margin-top:14px;
+    font-size:.8rem;
+    color:#b3432f;
+  }
+  .login-error.show{ display:block; }
+
   /* ---------- FOOTER ---------- */
   footer{
     padding:40px 0;
@@ -779,29 +821,49 @@
   <div class="panel-modal">
     <div class="panel-head">
       <div>
-        <span class="eyebrow">Panel del negocio · Demo</span>
+        <span class="eyebrow">Panel del negocio</span>
         <h3 class="display">Mensajes recibidos</h3>
       </div>
       <button class="panel-close" id="closePanel" aria-label="Cerrar">&times;</button>
     </div>
-    <div class="panel-stats">
-      <div class="panel-stat"><span class="num" id="statTotal">0</span><span class="label">Mensajes totales</span></div>
-      <div class="panel-stat"><span class="num" id="statNuevos">0</span><span class="label">Sin atender</span></div>
-      <div class="panel-stat"><span class="num" id="statHoy">0</span><span class="label">Recibidos hoy</span></div>
+
+    <div id="loginBox" class="login-box">
+      <span class="eyebrow" style="color:var(--c-wood-dark);">Acceso administrador</span>
+      <h4>Inicia sesión para ver los mensajes</h4>
+      <div class="form-field-light">
+        <label for="loginEmail">Correo</label>
+        <input type="email" id="loginEmail" placeholder="admin@tunegocio.com">
+      </div>
+      <div class="form-field-light">
+        <label for="loginPassword">Contraseña</label>
+        <input type="password" id="loginPassword" placeholder="••••••••">
+      </div>
+      <button class="btn btn-dark" id="loginBtn" type="button">Entrar</button>
+      <p class="login-error" id="loginError">Correo o contraseña incorrectos.</p>
     </div>
-    <div class="panel-body">
-      <table class="panel-table">
-        <thead>
-          <tr><th>Fecha</th><th>Nombre</th><th>Correo</th><th>Mensaje</th><th>Estado</th></tr>
-        </thead>
-        <tbody id="panelBody"></tbody>
-      </table>
-      <p class="panel-note" id="panelEmpty" style="display:none;">Aún no hay mensajes. Llena el formulario de contacto para ver cómo se guarda uno aquí.</p>
-      <p class="panel-note">Esta es la versión demo: los mensajes se guardan en este navegador. En la versión real (Plan Profesional), se guardan en una base de datos que el dueño del negocio puede consultar desde cualquier dispositivo, y puede llegar además una notificación por correo o WhatsApp.</p>
+
+    <div id="panelContent" style="display:none;">
+      <div class="panel-stats">
+        <div class="panel-stat"><span class="num" id="statTotal">0</span><span class="label">Mensajes totales</span></div>
+        <div class="panel-stat"><span class="num" id="statNuevos">0</span><span class="label">Sin atender</span></div>
+        <div class="panel-stat"><span class="num" id="statHoy">0</span><span class="label">Recibidos hoy</span></div>
+      </div>
+      <div class="panel-body">
+        <table class="panel-table">
+          <thead>
+            <tr><th>Fecha</th><th>Nombre</th><th>Correo</th><th>Mensaje</th><th>Estado</th></tr>
+          </thead>
+          <tbody id="panelBody"></tbody>
+        </table>
+        <p class="panel-note" id="panelEmpty" style="display:none;">Aún no hay mensajes. Llena el formulario de contacto para ver cómo se guarda uno aquí.</p>
+        <p class="panel-note">Mensajes guardados en la base de datos del negocio, visibles solo con una cuenta de administrador.</p>
+        <button class="btn btn-outline" id="logoutBtn" type="button" style="margin-top:18px;">Cerrar sesión</button>
+      </div>
     </div>
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
   // ---- Datos del catálogo (ficticios) ----
   const productos = [
@@ -867,62 +929,53 @@
   }, { threshold: 0.15 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  // ---- Mensajes recibidos (demo funcional guardada en este navegador) ----
-  const STORAGE_KEY = 'roble_mensajes_demo';
+  // ==================================================================
+  // CONEXIÓN A SUPABASE — base de datos + login de administrador
+  // Reemplaza estos dos valores con los de tu propio proyecto Supabase:
+  // Settings → API → Project URL / anon public key
+  // ==================================================================
+  const SUPABASE_URL = 'https://TU-PROYECTO.supabase.co';
+  const SUPABASE_ANON_KEY = 'TU-LLAVE-ANON-PUBLICA';
+  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-  function getMensajes(){
-    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
-    catch(e){ return []; }
-  }
-  function saveMensajes(lista){
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(lista));
-  }
-  function ordenados(){
-    return getMensajes().sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
-  }
-
-  function renderPanel(){
-    const lista = ordenados();
-    const hoy = new Date().toDateString();
-
-    document.getElementById('statTotal').textContent = lista.length;
-    document.getElementById('statNuevos').textContent = lista.filter(m => m.estado === 'nuevo').length;
-    document.getElementById('statHoy').textContent = lista.filter(m => new Date(m.fecha).toDateString() === hoy).length;
-    document.getElementById('panelEmpty').style.display = lista.length ? 'none' : 'block';
-
-    document.getElementById('panelBody').innerHTML = lista.map((m, i) => `
-      <tr>
-        <td class="mono">${new Date(m.fecha).toLocaleDateString('es-MX', { day:'2-digit', month:'short' })}</td>
-        <td>${m.nombre}</td>
-        <td>${m.correo}</td>
-        <td class="msg">${m.mensaje}</td>
-        <td><span class="badge ${m.estado}" data-idx="${i}">${m.estado === 'nuevo' ? 'Nuevo' : 'Atendido'}</span></td>
-      </tr>
-    `).join('');
-  }
-
-  document.getElementById('contactForm').addEventListener('submit', (e) => {
+  // ---- Formulario de contacto: guarda el mensaje en la base de datos ----
+  document.getElementById('contactForm').addEventListener('submit', async (e) => {
     e.preventDefault();
+    const btn = e.target.querySelector('button[type="submit"]');
+    const note = document.getElementById('formNote');
     const nombre = document.getElementById('nombre').value.trim();
     const correo = document.getElementById('correo').value.trim();
     const mensaje = document.getElementById('mensaje').value.trim();
 
-    const lista = getMensajes();
-    lista.push({ nombre, correo, mensaje, fecha: new Date().toISOString(), estado: 'nuevo' });
-    saveMensajes(lista);
+    btn.disabled = true;
+    btn.textContent = 'Enviando...';
 
-    const note = document.getElementById('formNote');
-    note.textContent = `Gracias, ${nombre.split(' ')[0]} — tu mensaje quedó guardado en nuestro sistema y te contactaremos pronto.`;
+    const { error } = await supabase.from('mensajes').insert([{ nombre, correo, mensaje }]);
+
+    if (error) {
+      note.textContent = 'Hubo un problema al enviar tu mensaje. Intenta de nuevo en un momento.';
+    } else {
+      note.textContent = `Gracias, ${nombre.split(' ')[0]} — tu mensaje quedó guardado y te contactaremos pronto.`;
+      e.target.reset();
+    }
     note.classList.add('show');
-    e.target.reset();
+    btn.disabled = false;
+    btn.textContent = 'Enviar mensaje';
   });
 
-  // ---- Abrir / cerrar panel ----
-  document.getElementById('openPanel').addEventListener('click', (e) => {
+  // ---- Abrir panel: revisa si ya hay sesión iniciada ----
+  document.getElementById('openPanel').addEventListener('click', async (e) => {
     e.preventDefault();
-    renderPanel();
     document.getElementById('panelOverlay').classList.add('open');
+    const { data } = await supabase.auth.getSession();
+    if (data.session) {
+      mostrarPanel();
+      cargarMensajes();
+    } else {
+      mostrarLogin();
+    }
   });
+
   document.getElementById('closePanel').addEventListener('click', () => {
     document.getElementById('panelOverlay').classList.remove('open');
   });
@@ -930,14 +983,72 @@
     if (e.target.id === 'panelOverlay') e.target.classList.remove('open');
   });
 
-  // ---- Marcar mensaje como atendido / nuevo ----
-  document.getElementById('panelBody').addEventListener('click', (e) => {
+  function mostrarLogin(){
+    document.getElementById('loginBox').style.display = 'block';
+    document.getElementById('panelContent').style.display = 'none';
+  }
+  function mostrarPanel(){
+    document.getElementById('loginBox').style.display = 'none';
+    document.getElementById('panelContent').style.display = 'block';
+  }
+
+  // ---- Login del administrador ----
+  document.getElementById('loginBtn').addEventListener('click', async () => {
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value;
+    const errorEl = document.getElementById('loginError');
+
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) {
+      errorEl.classList.add('show');
+      return;
+    }
+    errorEl.classList.remove('show');
+    mostrarPanel();
+    cargarMensajes();
+  });
+
+  document.getElementById('logoutBtn').addEventListener('click', async () => {
+    await supabase.auth.signOut();
+    mostrarLogin();
+  });
+
+  // ---- Cargar y mostrar mensajes (solo si hay sesión) ----
+  async function cargarMensajes(){
+    const { data, error } = await supabase
+      .from('mensajes')
+      .select('*')
+      .order('fecha', { ascending: false });
+
+    if (error) { console.error(error); return; }
+    renderPanel(data || []);
+  }
+
+  function renderPanel(lista){
+    const hoy = new Date().toDateString();
+    document.getElementById('statTotal').textContent = lista.length;
+    document.getElementById('statNuevos').textContent = lista.filter(m => m.estado === 'nuevo').length;
+    document.getElementById('statHoy').textContent = lista.filter(m => new Date(m.fecha).toDateString() === hoy).length;
+    document.getElementById('panelEmpty').style.display = lista.length ? 'none' : 'block';
+
+    document.getElementById('panelBody').innerHTML = lista.map(m => `
+      <tr>
+        <td class="mono">${new Date(m.fecha).toLocaleDateString('es-MX', { day:'2-digit', month:'short' })}</td>
+        <td>${m.nombre}</td>
+        <td>${m.correo}</td>
+        <td class="msg">${m.mensaje}</td>
+        <td><span class="badge ${m.estado}" data-id="${m.id}">${m.estado === 'nuevo' ? 'Nuevo' : 'Atendido'}</span></td>
+      </tr>
+    `).join('');
+  }
+
+  // ---- Cambiar estado de un mensaje (Nuevo / Atendido) ----
+  document.getElementById('panelBody').addEventListener('click', async (e) => {
     if (!e.target.classList.contains('badge')) return;
-    const idx = +e.target.dataset.idx;
-    const lista = ordenados();
-    lista[idx].estado = lista[idx].estado === 'nuevo' ? 'atendido' : 'nuevo';
-    saveMensajes(lista);
-    renderPanel();
+    const id = e.target.dataset.id;
+    const nuevoEstado = e.target.textContent.trim() === 'Nuevo' ? 'atendido' : 'nuevo';
+    await supabase.from('mensajes').update({ estado: nuevoEstado }).eq('id', id);
+    cargarMensajes();
   });
 </script>
 
