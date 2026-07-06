@@ -228,6 +228,38 @@
     to{ transform:translateX(-50%); }
   }
 
+  /* ---------- BADGES & WHATSAPP ---------- */
+  .plan-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:5px 12px;
+    border-radius:20px;
+    background:var(--c-green);
+    color:var(--c-white);
+    font-family:'Space Mono', monospace;
+    font-size:.66rem;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    margin-bottom:14px;
+  }
+  .plan-badge::before{ content:'✓'; }
+  .plan-badge.on-dark{ background:var(--c-wood-light); }
+
+  .whatsapp-float{
+    position:fixed;
+    bottom:26px; right:26px;
+    width:56px; height:56px;
+    border-radius:50%;
+    background:var(--c-green);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 10px 26px rgba(0,0,0,.28);
+    z-index:90;
+    transition:transform .3s var(--ease);
+  }
+  .whatsapp-float:hover{ transform:scale(1.08); }
+  .whatsapp-float svg{ width:26px; height:26px; fill:var(--c-white); }
+
   /* ---------- CATALOG ---------- */
   .cat-head{
     display:flex;
@@ -443,6 +475,106 @@
   }
   .form-note.show{ display:block; }
 
+  /* ---------- PANEL ADMIN (DEMO) ---------- */
+  .panel-link{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:'Space Mono', monospace;
+    font-size:.76rem;
+    letter-spacing:.05em;
+    color:rgba(250,248,245,.55);
+  }
+  .panel-link:hover{ color:var(--c-wood-light); }
+  .panel-link::before{ content:'●'; font-size:.5rem; color:var(--c-green); }
+
+  .panel-overlay{
+    position:fixed; inset:0;
+    background:rgba(20,19,18,.72);
+    z-index:200;
+    display:none;
+    align-items:flex-start;
+    justify-content:center;
+    padding:40px 20px;
+    overflow-y:auto;
+  }
+  .panel-overlay.open{ display:flex; }
+  .panel-modal{
+    background:var(--c-white);
+    width:100%;
+    max-width:920px;
+    border-radius:4px;
+    overflow:hidden;
+  }
+  .panel-head{
+    background:var(--c-charcoal);
+    color:var(--c-white);
+    padding:26px 32px;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:20px;
+  }
+  .panel-head .eyebrow{ color:var(--c-wood-light); }
+  .panel-head .eyebrow::before{ background:var(--c-wood-light); }
+  .panel-head h3{ font-family:'Fraunces', serif; font-weight:500; font-size:1.4rem; margin-top:10px; }
+  .panel-close{
+    color:rgba(250,248,245,.7);
+    font-size:1.4rem;
+    line-height:1;
+  }
+  .panel-close:hover{ color:var(--c-white); }
+  .panel-stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--c-line);
+  }
+  .panel-stat{
+    background:var(--c-cream);
+    padding:22px 28px;
+  }
+  .panel-stat .num{ font-family:'Fraunces', serif; font-size:2rem; font-weight:600; }
+  .panel-stat .label{ font-family:'Space Mono', monospace; font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; color:var(--c-charcoal-soft); margin-top:4px; display:block;}
+  .panel-body{ padding:10px 32px 32px; }
+  .panel-table{ width:100%; border-collapse:collapse; }
+  .panel-table th{
+    text-align:left;
+    font-family:'Space Mono', monospace;
+    font-size:.66rem;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--c-charcoal-soft);
+    padding:14px 10px;
+    border-bottom:1px solid var(--c-line);
+  }
+  .panel-table td{
+    padding:16px 10px;
+    border-bottom:1px solid var(--c-line);
+    font-size:.88rem;
+    vertical-align:top;
+  }
+  .panel-table td.msg{ max-width:260px; color:var(--c-charcoal-soft); }
+  .badge{
+    font-family:'Space Mono', monospace;
+    font-size:.66rem;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    padding:5px 10px;
+    border-radius:20px;
+    display:inline-block;
+    cursor:pointer;
+  }
+  .badge.nuevo{ background:rgba(63,75,58,.12); color:var(--c-green); }
+  .badge.atendido{ background:var(--c-line); color:var(--c-charcoal-soft); }
+  .panel-note{
+    margin-top:22px;
+    padding-top:18px;
+    border-top:1px solid var(--c-line);
+    font-size:.82rem;
+    color:var(--c-charcoal-soft);
+  }
+
   /* ---------- FOOTER ---------- */
   footer{
     padding:40px 0;
@@ -611,6 +743,7 @@
           <li><span class="k">Teléfono</span><span>(392) 555 0148</span></li>
           <li><span class="k">Correo</span><span>hola@roble-muebles.mx</span></li>
         </ul>
+        <p style="margin-top:24px;"><a href="#" class="panel-link" id="openPanel">Ver panel de mensajes recibidos (demo)</a></p>
       </div>
       <div class="reveal">
         <form id="contactForm">
@@ -641,6 +774,33 @@
     <span>Ocotlán, Jalisco · México</span>
   </div>
 </footer>
+
+<div class="panel-overlay" id="panelOverlay">
+  <div class="panel-modal">
+    <div class="panel-head">
+      <div>
+        <span class="eyebrow">Panel del negocio · Demo</span>
+        <h3 class="display">Mensajes recibidos</h3>
+      </div>
+      <button class="panel-close" id="closePanel" aria-label="Cerrar">&times;</button>
+    </div>
+    <div class="panel-stats">
+      <div class="panel-stat"><span class="num" id="statTotal">0</span><span class="label">Mensajes totales</span></div>
+      <div class="panel-stat"><span class="num" id="statNuevos">0</span><span class="label">Sin atender</span></div>
+      <div class="panel-stat"><span class="num" id="statHoy">0</span><span class="label">Recibidos hoy</span></div>
+    </div>
+    <div class="panel-body">
+      <table class="panel-table">
+        <thead>
+          <tr><th>Fecha</th><th>Nombre</th><th>Correo</th><th>Mensaje</th><th>Estado</th></tr>
+        </thead>
+        <tbody id="panelBody"></tbody>
+      </table>
+      <p class="panel-note" id="panelEmpty" style="display:none;">Aún no hay mensajes. Llena el formulario de contacto para ver cómo se guarda uno aquí.</p>
+      <p class="panel-note">Esta es la versión demo: los mensajes se guardan en este navegador. En la versión real (Plan Profesional), se guardan en una base de datos que el dueño del negocio puede consultar desde cualquier dispositivo, y puede llegar además una notificación por correo o WhatsApp.</p>
+    </div>
+  </div>
+</div>
 
 <script>
   // ---- Datos del catálogo (ficticios) ----
@@ -707,10 +867,77 @@
   }, { threshold: 0.15 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  // ---- Formulario de contacto (demo, sin envío real) ----
+  // ---- Mensajes recibidos (demo funcional guardada en este navegador) ----
+  const STORAGE_KEY = 'roble_mensajes_demo';
+
+  function getMensajes(){
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+    catch(e){ return []; }
+  }
+  function saveMensajes(lista){
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(lista));
+  }
+  function ordenados(){
+    return getMensajes().sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+  }
+
+  function renderPanel(){
+    const lista = ordenados();
+    const hoy = new Date().toDateString();
+
+    document.getElementById('statTotal').textContent = lista.length;
+    document.getElementById('statNuevos').textContent = lista.filter(m => m.estado === 'nuevo').length;
+    document.getElementById('statHoy').textContent = lista.filter(m => new Date(m.fecha).toDateString() === hoy).length;
+    document.getElementById('panelEmpty').style.display = lista.length ? 'none' : 'block';
+
+    document.getElementById('panelBody').innerHTML = lista.map((m, i) => `
+      <tr>
+        <td class="mono">${new Date(m.fecha).toLocaleDateString('es-MX', { day:'2-digit', month:'short' })}</td>
+        <td>${m.nombre}</td>
+        <td>${m.correo}</td>
+        <td class="msg">${m.mensaje}</td>
+        <td><span class="badge ${m.estado}" data-idx="${i}">${m.estado === 'nuevo' ? 'Nuevo' : 'Atendido'}</span></td>
+      </tr>
+    `).join('');
+  }
+
   document.getElementById('contactForm').addEventListener('submit', (e) => {
     e.preventDefault();
-    document.getElementById('formNote').classList.add('show');
+    const nombre = document.getElementById('nombre').value.trim();
+    const correo = document.getElementById('correo').value.trim();
+    const mensaje = document.getElementById('mensaje').value.trim();
+
+    const lista = getMensajes();
+    lista.push({ nombre, correo, mensaje, fecha: new Date().toISOString(), estado: 'nuevo' });
+    saveMensajes(lista);
+
+    const note = document.getElementById('formNote');
+    note.textContent = `Gracias, ${nombre.split(' ')[0]} — tu mensaje quedó guardado en nuestro sistema y te contactaremos pronto.`;
+    note.classList.add('show');
+    e.target.reset();
+  });
+
+  // ---- Abrir / cerrar panel ----
+  document.getElementById('openPanel').addEventListener('click', (e) => {
+    e.preventDefault();
+    renderPanel();
+    document.getElementById('panelOverlay').classList.add('open');
+  });
+  document.getElementById('closePanel').addEventListener('click', () => {
+    document.getElementById('panelOverlay').classList.remove('open');
+  });
+  document.getElementById('panelOverlay').addEventListener('click', (e) => {
+    if (e.target.id === 'panelOverlay') e.target.classList.remove('open');
+  });
+
+  // ---- Marcar mensaje como atendido / nuevo ----
+  document.getElementById('panelBody').addEventListener('click', (e) => {
+    if (!e.target.classList.contains('badge')) return;
+    const idx = +e.target.dataset.idx;
+    const lista = ordenados();
+    lista[idx].estado = lista[idx].estado === 'nuevo' ? 'atendido' : 'nuevo';
+    saveMensajes(lista);
+    renderPanel();
   });
 </script>
 
