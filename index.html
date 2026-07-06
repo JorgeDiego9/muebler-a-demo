@@ -943,7 +943,10 @@
     }
     const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    // ---- Formulario de contacto: guarda el mensaje en la base de datos ----
+    // Número de WhatsApp del negocio: código de país (52 para México) + número a 10 dígitos, sin espacios ni signos
+    const WHATSAPP_NUMBER = '523921266110';
+
+    // ---- Formulario de contacto: guarda el mensaje en la base de datos y abre WhatsApp ----
     document.getElementById('contactForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       const btn = e.target.querySelector('button[type="submit"]');
@@ -958,7 +961,13 @@
       try {
         const { error } = await supabase.from('mensajes').insert([{ nombre, correo, mensaje }]);
         if (error) throw error;
-        note.textContent = `Gracias, ${nombre.split(' ')[0]} — tu mensaje quedó guardado y te contactaremos pronto.`;
+
+        note.textContent = `Gracias, ${nombre.split(' ')[0]} — tu mensaje quedó guardado. Abrimos WhatsApp para que nos escribas directo.`;
+
+        const textoWhatsapp = `Hola, soy ${nombre}. Mi correo es ${correo}. Mi mensaje: ${mensaje}`;
+        const urlWhatsapp = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(textoWhatsapp)}`;
+        window.open(urlWhatsapp, '_blank');
+
         e.target.reset();
       } catch (err) {
         console.error('Error al guardar mensaje:', err);
@@ -1017,6 +1026,7 @@
         cargarMensajes();
       } catch (err) {
         console.error('Error de login:', err);
+        errorEl.textContent = err.message || 'Correo o contraseña incorrectos.';
         errorEl.classList.add('show');
       }
     });
