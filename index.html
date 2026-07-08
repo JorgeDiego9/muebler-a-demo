@@ -828,9 +828,68 @@
     .hero{ padding-top:150px; }
     .nav-links{ display:none; }
   }
+
+  /* ================================================================
+     TÉCNICAS NUEVAS: cursor personalizado, botones magnéticos,
+     texto que se revela por palabra, cortina en fotos
+  ================================================================ */
+
+  /* ---- Cursor personalizado (solo en dispositivos con mouse) ---- */
+  body.has-custom-cursor, body.has-custom-cursor a, body.has-custom-cursor button{ cursor:none; }
+  .cursor-dot, .cursor-ring{
+    position:fixed; top:0; left:0; z-index:9500;
+    pointer-events:none;
+    transform:translate(-50%,-50%);
+    border-radius:50%;
+  }
+  .cursor-dot{
+    width:7px; height:7px;
+    background:var(--c-charcoal);
+    transition:opacity .2s var(--ease), background .25s var(--ease);
+  }
+  .cursor-ring{
+    width:38px; height:38px;
+    border:1px solid var(--c-charcoal);
+    opacity:.55;
+    transition:width .3s var(--ease-spring, var(--ease)), height .3s var(--ease-spring, var(--ease)),
+               opacity .2s var(--ease), border-color .25s var(--ease), background .25s var(--ease);
+  }
+  .cursor-ring.grow{ width:64px; height:64px; background:rgba(43,42,40,.06); }
+  .cursor-ring.on-dark{ border-color:var(--c-white); }
+  .cursor-dot.on-dark{ background:var(--c-white); }
+  body.cursor-hidden .cursor-dot, body.cursor-hidden .cursor-ring{ opacity:0; }
+
+  /* ---- Texto revelado por palabra ---- */
+  .split-word{
+    display:inline-block;
+    overflow:hidden;
+    vertical-align:top;
+  }
+  .split-word span{
+    display:inline-block;
+    transform:translateY(110%);
+    transition:transform .7s var(--ease);
+  }
+  .split-word.in span{ transform:translateY(0); }
+
+  /* ---- Cortina de revelado sobre fotos ---- */
+  .curtain{ position:relative; overflow:hidden; }
+  .curtain::after{
+    content:'';
+    position:absolute; inset:0;
+    background:var(--c-charcoal);
+    transform:scaleX(1);
+    transform-origin:right;
+    transition:transform .9s var(--ease);
+    z-index:2;
+  }
+  .curtain.in::after{ transform:scaleX(0); }
 </style>
 </head>
 <body>
+
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="cursor-dot" id="cursorDot"></div>
 
 <div id="preloader">
   <div class="bar"></div>
@@ -865,7 +924,7 @@
       </div>
       <div class="hero-figure reveal in">
         <div class="frame"></div>
-        <div class="photo">
+        <div class="photo curtain" id="heroCurtain">
           <img src="mueble1.jpg" alt="Sofá modular Tulum" onerror="this.parentElement.classList.add('img-fallback'); this.remove()">
         </div>
       </div>
@@ -929,12 +988,12 @@
 <section id="proceso" class="proceso">
   <div class="wrap">
     <div class="proceso-grid">
-      <div class="proceso-figure reveal">
+      <div class="proceso-figure reveal curtain">
         <img src="mueble2.jpg" alt="Detalle de mesa de encino" onerror="this.parentElement.classList.add('img-fallback'); this.remove()">
       </div>
       <div class="reveal">
         <span class="eyebrow">De la troza a tu casa</span>
-        <h2 class="display">Tres pasos, ningún atajo.</h2>
+        <h2 class="display split-text">Tres pasos, ningún atajo.</h2>
         <div class="steps">
           <div class="step">
             <span class="n mono">01</span>
@@ -968,7 +1027,7 @@
   <div class="wrap">
     <div class="reveal" style="text-align:center;">
       <span class="eyebrow" style="justify-content:center;">Lo que dicen nuestros clientes</span>
-      <h2 class="display" style="font-size:clamp(1.9rem,3vw,2.5rem); font-weight:500; margin-top:14px;">Piezas que se quedan en la familia</h2>
+      <h2 class="display split-text" style="font-size:clamp(1.9rem,3vw,2.5rem); font-weight:500; margin-top:14px;">Piezas que se quedan en la familia</h2>
     </div>
     <div class="testi-grid">
       <div class="testi reveal">
@@ -996,7 +1055,7 @@
   <div class="wrap">
     <div class="reveal" style="text-align:center;">
       <span class="eyebrow" style="justify-content:center;">Antes de escribirnos</span>
-      <h2 class="display" style="font-size:clamp(1.9rem,3vw,2.5rem); font-weight:500; margin-top:14px;">Preguntas frecuentes</h2>
+      <h2 class="display split-text" style="font-size:clamp(1.9rem,3vw,2.5rem); font-weight:500; margin-top:14px;">Preguntas frecuentes</h2>
     </div>
     <div class="faq-list">
       <div class="faq-item reveal">
@@ -1139,6 +1198,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
 <script>
   // ---- Datos del catálogo (ficticios) ----
   const productos = [
@@ -1467,6 +1527,138 @@
       });
     }
   }
+</script>
+
+<!-- ==================================================================
+     LABORATORIO DE TÉCNICAS: cursor personalizado, botones magnéticos,
+     scroll con inercia (Lenis), texto revelado por palabra y cortina
+     de fotos. Todo aislado en su propio bloque para no chocar con
+     nada de arriba.
+================================================================== -->
+<script>
+  // ---- 1) Cursor personalizado (solo si el dispositivo tiene mouse real) ----
+  const isFinePointer = window.matchMedia('(pointer: fine)').matches;
+  if (isFinePointer) {
+    document.body.classList.add('has-custom-cursor');
+    const cursorDot = document.getElementById('cursorDot');
+    const cursorRing = document.getElementById('cursorRing');
+    let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
+    let ringX = mouseX, ringY = mouseY;
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX; mouseY = e.clientY;
+      cursorDot.style.left = mouseX + 'px';
+      cursorDot.style.top = mouseY + 'px';
+      document.body.classList.remove('cursor-hidden');
+    });
+    document.addEventListener('mouseleave', () => document.body.classList.add('cursor-hidden'));
+
+    (function cursorRaf(){
+      ringX += (mouseX - ringX) * 0.18;
+      ringY += (mouseY - ringY) * 0.18;
+      cursorRing.style.left = ringX + 'px';
+      cursorRing.style.top = ringY + 'px';
+      requestAnimationFrame(cursorRaf);
+    })();
+
+    // El anillo crece sobre elementos interactivos
+    document.querySelectorAll('a, button, .card, input, textarea, .filter-btn').forEach(el => {
+      el.addEventListener('mouseenter', () => cursorRing.classList.add('grow'));
+      el.addEventListener('mouseleave', () => cursorRing.classList.remove('grow'));
+    });
+
+    // El cursor cambia a blanco sobre fondos oscuros
+    document.querySelectorAll('.contacto, .stats, .marquee-strip, .panel-overlay').forEach(el => {
+      el.addEventListener('mouseenter', () => { cursorDot.classList.add('on-dark'); cursorRing.classList.add('on-dark'); });
+      el.addEventListener('mouseleave', () => { cursorDot.classList.remove('on-dark'); cursorRing.classList.remove('on-dark'); });
+    });
+  }
+
+  // ---- 2) Botones magnéticos: siguen un poco al cursor cuando están cerca ----
+  function initMagnetic(el, strength = 0.35, max = 14){
+    el.addEventListener('mousemove', (e) => {
+      const r = el.getBoundingClientRect();
+      let x = (e.clientX - r.left - r.width / 2) * strength;
+      let y = (e.clientY - r.top - r.height / 2) * strength;
+      x = Math.max(-max, Math.min(max, x));
+      y = Math.max(-max, Math.min(max, y));
+      el.style.transform = `translate(${x}px, ${y}px)`;
+    });
+    el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+  }
+  if (isFinePointer) {
+    document.querySelectorAll('.btn, .filter-btn').forEach(el => initMagnetic(el));
+  }
+
+  // ---- 3) Scroll con inercia (Lenis), enganchado a los enlaces con # ----
+  if (typeof Lenis !== 'undefined') {
+    const lenis = new Lenis({
+      duration: 1.1,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    });
+    function lenisRaf(time){ lenis.raf(time); requestAnimationFrame(lenisRaf); }
+    requestAnimationFrame(lenisRaf);
+
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        const id = link.getAttribute('href');
+        if (id.length > 1) {
+          const target = document.querySelector(id);
+          if (target) { e.preventDefault(); lenis.scrollTo(target, { offset: -20 }); }
+        }
+      });
+    });
+  } else {
+    console.warn('Lenis no cargó — el scroll sigue funcionando normal, solo sin la inercia extra.');
+  }
+
+  // ---- 4) Texto revelado por palabra (solo en encabezados de texto plano) ----
+  function splitWords(el){
+    Array.from(el.childNodes).forEach(node => {
+      if (node.nodeType === 3 && node.textContent.trim().length) {
+        const frag = document.createDocumentFragment();
+        node.textContent.split(/(\s+)/).forEach(chunk => {
+          if (!chunk.length) return;
+          if (/^\s+$/.test(chunk)) {
+            frag.appendChild(document.createTextNode(chunk));
+          } else {
+            const wrap = document.createElement('span');
+            wrap.className = 'split-word';
+            const inner = document.createElement('span');
+            inner.textContent = chunk;
+            wrap.appendChild(inner);
+            frag.appendChild(wrap);
+          }
+        });
+        el.replaceChild(frag, node);
+      }
+      // los elementos hijos (em, br, etc.) se dejan intactos, sin dividir
+    });
+  }
+  document.querySelectorAll('.split-text').forEach(h => {
+    splitWords(h);
+    h.querySelectorAll('.split-word').forEach((w, i) => { w.style.transitionDelay = (i * 45) + 'ms'; });
+  });
+  const splitObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.split-word').forEach(w => w.classList.add('in'));
+        splitObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  document.querySelectorAll('.split-text').forEach(h => splitObserver.observe(h));
+
+  // ---- 5) Cortina de revelado sobre las fotos del hero y del proceso ----
+  const curtainObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        curtainObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.curtain').forEach(el => curtainObserver.observe(el));
 </script>
 
 </body>
