@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ROBLE — Muebles hechos para durar</title>
+<title>ROBLE — Muebles de Herencia y Alta Ebanistería</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Work+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200..900;1,9..144,200..900&family=Work+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --c-white:#FAF8F5;
-    --c-cream:#EFE9E1;
-    --c-charcoal:#2B2A28;
-    --c-charcoal-soft:#43413d;
-    --c-wood-light:#B98D62;
-    --c-wood-dark:#6B4A32;
-    --c-green:#3F4B3A;
-    --c-line: rgba(43,42,40,0.14);
-    --ease: cubic-bezier(.22,.61,.36,1);
+    --c-white: #FBFBFA;
+    --c-cream: #F3ECE3;
+    --c-charcoal: #1C1B1A;
+    --c-charcoal-soft: #3E3C3A;
+    --c-wood-light: #C29B72;
+    --c-wood-dark: #583D28;
+    --c-green: #2F3B2C;
+    --c-line: rgba(28, 27, 26, 0.09);
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   *{margin:0;padding:0;box-sizing:border-box;}
@@ -26,59 +26,59 @@
     color:var(--c-charcoal);
     font-family:'Work Sans', sans-serif;
     font-size:16px;
-    line-height:1.6;
+    line-height:1.65;
     -webkit-font-smoothing:antialiased;
   }
   img{display:block;max-width:100%;}
   a{color:inherit;text-decoration:none;}
   button{font-family:inherit;cursor:pointer;border:none;background:none;}
-  ::selection{background:var(--c-wood-light); color:var(--c-white);}
+  ::selection{background:var(--c-wood-light); color:var(--c-charcoal);}
 
-  .display{font-family:'Fraunces', serif;}
+  .display{font-family:'Fraunces', serif; font-weight: 300;}
   .mono{font-family:'Space Mono', monospace;}
   .eyebrow{
     font-family:'Space Mono', monospace;
-    font-size:.72rem;
-    letter-spacing:.18em;
+    font-size:.75rem;
+    letter-spacing:.22em;
     text-transform:uppercase;
     color:var(--c-wood-dark);
     display:inline-flex;
     align-items:center;
-    gap:.5rem;
+    gap:.75rem;
   }
   .eyebrow::before{
     content:'';
-    width:18px;height:1px;
+    width:24px;height:1px;
     background:var(--c-wood-dark);
     display:inline-block;
   }
   .wrap{
-    max-width:1200px;
+    max-width:1280px;
     margin:0 auto;
-    padding:0 32px;
+    padding:0 40px;
   }
-  section{ padding:120px 0; }
+  section{ padding:140px 0; }
   @media (max-width:768px){
-    section{ padding:80px 0; }
-    .wrap{ padding:0 20px; }
+    section{ padding:90px 0; }
+    .wrap{ padding:0 24px; }
   }
 
   /* reveal on scroll */
-  .reveal{opacity:0; transform:translateY(24px); transition:opacity .8s var(--ease), transform .8s var(--ease);}
+  .reveal{opacity:0; transform:translateY(30px); transition:opacity 1.2s var(--ease), transform 1.2s var(--ease);}
   .reveal.in{opacity:1; transform:translateY(0);}
 
   /* ---------- HEADER ---------- */
   header{
     position:fixed; top:0; left:0; right:0;
     z-index:100;
-    padding:26px 0;
-    transition:padding .4s var(--ease), background .4s var(--ease), box-shadow .4s var(--ease);
+    padding:32px 0;
+    transition:padding .5s var(--ease), background .5s var(--ease), box-shadow .5s var(--ease);
   }
   header.scrolled{
-    padding:16px 0;
-    background:rgba(250,248,245,0.92);
-    -webkit-backdrop-filter:blur(10px);
-    backdrop-filter:blur(10px);
+    padding:18px 0;
+    background:rgba(251,251,250,0.85);
+    -webkit-backdrop-filter:blur(20px);
+    backdrop-filter:blur(20px);
     box-shadow:0 1px 0 var(--c-line);
   }
   .nav{
@@ -88,82 +88,92 @@
   }
   .logo{
     font-family:'Fraunces', serif;
-    font-weight:700;
-    font-size:1.5rem;
-    letter-spacing:.02em;
+    font-weight:600;
+    font-size:1.6rem;
+    letter-spacing:.03em;
+    text-transform: uppercase;
   }
-  .logo em{ color:var(--c-wood-dark); font-style:italic; }
+  .logo em{ color:var(--c-wood-light); font-style:italic; font-weight: 300; }
   .nav-links{
     display:flex;
-    gap:36px;
+    gap:44px;
     list-style:none;
-    font-size:.92rem;
+    font-size:.88rem;
+    font-weight: 500;
+    letter-spacing: .02em;
   }
   .nav-links a{
     position:relative;
-    padding-bottom:4px;
+    padding-bottom:6px;
+    opacity: 0.8;
+    transition: opacity .3s var(--ease);
   }
+  .nav-links a:hover { opacity: 1; }
   .nav-links a::after{
     content:'';
     position:absolute; left:0; bottom:0;
     width:0; height:1px;
     background:var(--c-charcoal);
-    transition:width .3s var(--ease);
+    transition:width .4s var(--ease);
   }
   .nav-links a:hover::after{ width:100%; }
   .btn{
     display:inline-flex;
     align-items:center;
-    gap:8px;
-    padding:12px 22px;
-    border-radius:2px;
-    font-size:.88rem;
+    gap:10px;
+    padding:14px 28px;
+    border-radius:0px; /* Bordes rectos para un look más arquitectónico y premium */
+    font-size:.82rem;
     font-weight:500;
-    transition:transform .3s var(--ease), background .3s var(--ease);
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    transition:transform .4s var(--ease), background .4s var(--ease), color .4s var(--ease), border-color .4s var(--ease);
   }
   .btn-dark{
     background:var(--c-charcoal);
     color:var(--c-white);
   }
-  .btn-dark:hover{ background:var(--c-wood-dark); transform:translateY(-2px); }
+  .btn-dark:hover{ background:var(--c-wood-dark); transform:translateY(-3px); }
   .btn-outline{
     border:1px solid var(--c-charcoal);
+    color: var(--c-charcoal);
   }
-  .btn-outline:hover{ background:var(--c-charcoal); color:var(--c-white); }
+  .btn-outline:hover{ background:var(--c-charcoal); color:var(--c-white); transform:translateY(-3px); }
   .nav-toggle{ display:none; }
 
   /* ---------- HERO ---------- */
   .hero{
-    padding:190px 0 0;
+    padding:220px 0 40px;
     overflow:hidden;
   }
   .hero-grid{
     display:grid;
-    grid-template-columns:1fr .85fr;
-    gap:60px;
+    grid-template-columns:1.1fr .9fr;
+    gap:80px;
     align-items:center;
   }
   .hero h1{
-    font-size:clamp(2.6rem, 5vw, 4.4rem);
-    font-weight:600;
-    line-height:1.05;
-    letter-spacing:-.01em;
+    font-size:clamp(2.8rem, 5.5vw, 4.8rem);
+    font-weight:300;
+    line-height:1.1;
+    letter-spacing:-.02em;
   }
   .hero h1 em{
     font-style:italic;
     color:var(--c-wood-dark);
-    font-weight:400;
+    font-weight:300;
   }
   .hero p.lead{
-    margin-top:26px;
-    max-width:440px;
-    font-size:1.05rem;
+    margin-top:32px;
+    max-width:480px;
+    font-size:1.1rem;
     color:var(--c-charcoal-soft);
+    font-weight: 300;
   }
   .hero-actions{
-    margin-top:38px;
+    margin-top:44px;
     display:flex;
-    gap:16px;
+    gap:20px;
     flex-wrap:wrap;
   }
   .hero-figure{
@@ -171,30 +181,31 @@
   }
   .hero-figure .frame{
     position:absolute;
-    inset:-16px -16px auto auto;
-    top:-18px; right:-18px;
+    inset:-20px -20px auto auto;
+    top:-24px; right:-24px;
     width:100%; height:100%;
     border:1px solid var(--c-wood-light);
     z-index:0;
+    opacity: 0.5;
   }
   .hero-figure .photo{
     position:relative;
     z-index:1;
     aspect-ratio:4/5;
     overflow:hidden;
-    background:var(--c-charcoal);
+    background:var(--c-cream);
   }
   .img-fallback{
     display:flex; align-items:flex-end;
-    background:linear-gradient(150deg, var(--c-wood-light), var(--c-wood-dark));
+    background:linear-gradient(150deg, #E6DDD4, #D5C7B9);
     height:100%; width:100%;
-    padding:18px;
+    padding:24px;
   }
   .img-fallback span{
     font-family:'Space Mono', monospace;
-    font-size:.72rem;
-    letter-spacing:.08em;
-    color:rgba(255,255,255,.85);
+    font-size:.75rem;
+    letter-spacing:.1em;
+    color:var(--c-charcoal-soft);
     text-transform:uppercase;
   }
   .photo img, .photo{ width:100%; height:100%; object-fit:cover; }
@@ -204,61 +215,47 @@
     background:var(--c-charcoal);
     color:var(--c-cream);
     overflow:hidden;
-    padding:18px 0;
-    margin-top:100px;
+    padding:24px 0;
+    margin-top:120px;
     white-space:nowrap;
   }
   .marquee-track{
     display:inline-flex;
-    animation:scroll-left 32s linear infinite;
+    animation:scroll-left 38s linear infinite;
   }
   .marquee-track span{
     font-family:'Space Mono', monospace;
-    font-size:.85rem;
-    letter-spacing:.12em;
+    font-size:.8rem;
+    letter-spacing:.15em;
     text-transform:uppercase;
-    padding:0 28px;
+    padding:0 36px;
     display:inline-flex;
     align-items:center;
-    gap:28px;
+    gap:36px;
   }
-  .marquee-track span::after{ content:'◆'; font-size:.6rem; color:var(--c-wood-light); }
+  .marquee-track span::after{ content:'✦'; font-size:.5rem; color:var(--c-wood-light); }
   @keyframes scroll-left{
     from{ transform:translateX(0); }
     to{ transform:translateX(-50%); }
   }
 
-  /* ---------- BADGES & WHATSAPP ---------- */
+  /* ---------- BADGES & FLOATS ---------- */
   .plan-badge{
     display:inline-flex;
     align-items:center;
-    gap:6px;
-    padding:5px 12px;
-    border-radius:20px;
+    gap:8px;
+    padding:6px 14px;
+    border-radius:0px;
     background:var(--c-green);
     color:var(--c-white);
     font-family:'Space Mono', monospace;
-    font-size:.66rem;
-    letter-spacing:.06em;
+    font-size:.68rem;
+    letter-spacing:.08em;
     text-transform:uppercase;
-    margin-bottom:14px;
+    margin-bottom:18px;
   }
-  .plan-badge::before{ content:'✓'; }
-  .plan-badge.on-dark{ background:var(--c-wood-light); }
-
-  .whatsapp-float{
-    position:fixed;
-    bottom:26px; right:26px;
-    width:56px; height:56px;
-    border-radius:50%;
-    background:var(--c-green);
-    display:flex; align-items:center; justify-content:center;
-    box-shadow:0 10px 26px rgba(0,0,0,.28);
-    z-index:90;
-    transition:transform .3s var(--ease);
-  }
-  .whatsapp-float:hover{ transform:scale(1.08); }
-  .whatsapp-float svg{ width:26px; height:26px; fill:var(--c-white); }
+  .plan-badge::before{ content:'•'; color: var(--c-wood-light); }
+  .plan-badge.on-dark{ background:var(--c-wood-dark); }
 
   /* ---------- CATALOG ---------- */
   .cat-head{
@@ -266,32 +263,34 @@
     justify-content:space-between;
     align-items:flex-end;
     flex-wrap:wrap;
-    gap:24px;
-    margin-bottom:50px;
+    gap:32px;
+    margin-bottom:60px;
   }
   .cat-head h2{
-    font-size:clamp(2rem, 3.4vw, 2.8rem);
-    font-weight:500;
-    max-width:560px;
-    margin-top:14px;
+    font-size:clamp(2.2rem, 4vw, 3.2rem);
+    font-weight:300;
+    max-width:620px;
+    margin-top:18px;
+    line-height: 1.15;
   }
   .filters{
     display:flex;
-    gap:10px;
+    gap:12px;
     flex-wrap:wrap;
   }
   .filter-btn{
-    padding:9px 18px;
-    font-size:.82rem;
+    padding:10px 22px;
+    font-size:.78rem;
     font-family:'Space Mono', monospace;
-    letter-spacing:.04em;
+    letter-spacing:.06em;
     text-transform:uppercase;
     border:1px solid var(--c-line);
-    border-radius:20px;
+    border-radius:0px;
     color:var(--c-charcoal-soft);
-    transition:all .3s var(--ease);
+    background: transparent;
+    transition:all .4s var(--ease);
   }
-  .filter-btn:hover{ border-color:var(--c-charcoal); }
+  .filter-btn:hover{ border-color:var(--c-charcoal); color: var(--c-charcoal); }
   .filter-btn.active{
     background:var(--c-charcoal);
     color:var(--c-white);
@@ -301,16 +300,16 @@
   .grid{
     display:grid;
     grid-template-columns:repeat(3, 1fr);
-    gap:2px;
-    background:var(--c-line);
+    gap:32px; /* Galería modular abierta en lugar de bloques pegados */
+    background:transparent;
   }
-  @media (max-width:900px){ .grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:900px){ .grid{ grid-template-columns:repeat(2,1fr); gap:24px; } }
   @media (max-width:560px){ .grid{ grid-template-columns:1fr; } }
 
   .card{
-    background:var(--c-white);
+    background:transparent;
     position:relative;
-    transition:opacity .4s var(--ease), transform .4s var(--ease);
+    transition:opacity .5s var(--ease), transform .5s var(--ease);
   }
   .card.hide{
     display:none;
@@ -319,125 +318,126 @@
     aspect-ratio:1/1;
     overflow:hidden;
     position:relative;
-    perspective:800px;
-    transition:transform .25s var(--ease);
+    perspective:1000px;
+    transition:transform .3s var(--ease);
     transform-style:preserve-3d;
+    background: var(--c-cream);
   }
   .card-figure img{
     width:100%; height:100%; object-fit:cover;
-    transition:transform .6s var(--ease);
+    transition:transform .8s var(--ease);
     cursor:zoom-in;
   }
-  .card:hover .card-figure img{ transform:scale(1.06); }
+  .card:hover .card-figure img{ transform:scale(1.04); }
   .card-figure .img-fallback{ align-items:center; justify-content:center; cursor:default; }
-  .card-figure .img-fallback span{ font-size:.68rem; }
 
   /* ---------- PRELOADER ---------- */
   #preloader{
     position:fixed; inset:0; z-index:9999;
     background:var(--c-charcoal);
     display:flex; align-items:center; justify-content:center;
-    transition:opacity .6s var(--ease), visibility .6s var(--ease);
+    transition:opacity .8s var(--ease), visibility .8s var(--ease);
   }
   #preloader.hide{ opacity:0; visibility:hidden; pointer-events:none; }
   #preloader .logo{
     color:var(--c-white);
-    font-size:2rem;
+    font-size:2.4rem;
     opacity:0;
-    animation:preloaderFade 1.4s var(--ease) forwards;
+    font-weight: 300;
+    animation:preloaderFade 1.6s var(--ease) forwards;
   }
   #preloader .logo em{ color:var(--c-wood-light); font-style:italic; }
   @keyframes preloaderFade{
-    0%{ opacity:0; letter-spacing:.3em; }
-    60%{ opacity:1; letter-spacing:.05em; }
-    100%{ opacity:1; letter-spacing:.02em; }
+    0%{ opacity:0; letter-spacing:.4em; }
+    60%{ opacity:1; letter-spacing:.1em; }
+    100%{ opacity:1; letter-spacing:.03em; }
   }
   #preloader .bar{
     position:absolute; bottom:38%;
-    width:160px; height:1px;
-    background:rgba(250,248,245,.2);
+    width:200px; height:1px;
+    background:rgba(251,251,250,.15);
     overflow:hidden;
   }
   #preloader .bar::after{
     content:'';
     position:absolute; left:-100%; top:0; bottom:0; width:100%;
     background:var(--c-wood-light);
-    animation:preloaderBar 1.2s var(--ease) forwards .2s;
+    animation:preloaderBar 1.4s var(--ease) forwards .3s;
   }
   @keyframes preloaderBar{ to{ left:0; } }
 
-  /* ---------- WHATSAPP FLOTANTE ---------- */
+  /* ---------- FLOATS ---------- */
   .whatsapp-float{
     position:fixed;
-    right:24px; bottom:24px;
+    right:32px; bottom:32px;
     z-index:80;
-    width:56px; height:56px;
+    width:60px; height:60px;
     border-radius:50%;
-    background:#25D366;
+    background:#1EBEA5;
     display:flex; align-items:center; justify-content:center;
-    box-shadow:0 6px 18px rgba(0,0,0,.22);
-    transition:transform .3s var(--ease);
+    box-shadow:0 8px 24px rgba(0,0,0,.15);
+    transition:transform .4s var(--ease);
   }
-  .whatsapp-float:hover{ transform:scale(1.08); }
+  .whatsapp-float:hover{ transform:scale(1.1) translateY(-2px); }
   .whatsapp-float svg{ width:28px; height:28px; }
   .whatsapp-float .ping{
     position:absolute; inset:0;
     border-radius:50%;
-    background:#25D366;
-    opacity:.55;
-    animation:wa-ping 2.4s ease-out infinite;
+    background:#1EBEA5;
+    opacity:.4;
+    animation:wa-ping 2.6s ease-out infinite;
   }
   @keyframes wa-ping{
-    0%{ transform:scale(1); opacity:.5; }
-    100%{ transform:scale(1.7); opacity:0; }
+    0%{ transform:scale(1); opacity:.4; }
+    100%{ transform:scale(1.6); opacity:0; }
   }
 
-  /* ---------- BOTON REGRESAR ARRIBA ---------- */
   .to-top{
     position:fixed;
-    right:24px; bottom:90px;
+    right:40px; bottom:110px;
     z-index:80;
     width:44px; height:44px;
     border-radius:50%;
     background:var(--c-charcoal);
     color:var(--c-white);
     display:flex; align-items:center; justify-content:center;
-    opacity:0; visibility:hidden; transform:translateY(10px);
-    transition:opacity .3s var(--ease), transform .3s var(--ease), visibility .3s;
+    opacity:0; visibility:hidden; transform:translateY(15px);
+    transition:opacity .4s var(--ease), transform .4s var(--ease), visibility .4s;
+    box-shadow: 0 4px 12px rgba(0,0,0,.1);
   }
   .to-top.show{ opacity:1; visibility:visible; transform:translateY(0); }
-  .to-top:hover{ background:var(--c-wood-dark); }
+  .to-top:hover{ background:var(--c-wood-dark); transform:translateY(-3px); }
 
   /* ---------- ESTADISTICAS ---------- */
   .stats{
     background:var(--c-charcoal);
     color:var(--c-white);
-    padding:70px 0;
+    padding:90px 0;
   }
   .stats-grid{
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:30px;
+    gap:40px;
     text-align:center;
   }
-  @media (max-width:768px){ .stats-grid{ grid-template-columns:repeat(2,1fr); gap:36px 20px; } }
+  @media (max-width:768px){ .stats-grid{ grid-template-columns:repeat(2,1fr); gap:44px 24px; } }
   .stat-num{
     font-family:'Fraunces', serif;
-    font-weight:600;
-    font-size:clamp(2.2rem, 4vw, 3rem);
+    font-weight:300;
+    font-size:clamp(2.5rem, 4.5vw, 3.6rem);
     color:var(--c-wood-light);
   }
   .stat-label{
-    margin-top:8px;
+    margin-top:12px;
     font-family:'Space Mono', monospace;
-    font-size:.72rem;
-    letter-spacing:.08em;
+    font-size:.75rem;
+    letter-spacing:.12em;
     text-transform:uppercase;
-    color:rgba(250,248,245,.65);
+    color:rgba(251,251,250,.55);
   }
 
   /* ---------- FAQ ---------- */
-  .faq-list{ max-width:760px; margin:50px auto 0; }
+  .faq-list{ max-width:800px; margin:60px auto 0; }
   .faq-item{
     border-top:1px solid var(--c-line);
   }
@@ -447,23 +447,24 @@
     display:flex;
     justify-content:space-between;
     align-items:center;
-    gap:20px;
-    padding:24px 4px;
+    gap:24px;
+    padding:28px 8px;
     text-align:left;
     font-family:'Fraunces', serif;
-    font-size:1.08rem;
-    font-weight:500;
+    font-size:1.15rem;
+    font-weight:400;
+    color: var(--c-charcoal);
   }
   .faq-q .icon{
     flex-shrink:0;
-    width:22px; height:22px;
+    width:18px; height:18px;
     position:relative;
   }
   .faq-q .icon::before, .faq-q .icon::after{
     content:'';
     position:absolute;
     background:var(--c-charcoal);
-    transition:transform .3s var(--ease);
+    transition:transform .4s var(--ease);
   }
   .faq-q .icon::before{ left:0; top:50%; width:100%; height:1px; transform:translateY(-50%); }
   .faq-q .icon::after{ top:0; left:50%; width:1px; height:100%; transform:translateX(-50%); }
@@ -471,27 +472,28 @@
   .faq-a{
     max-height:0;
     overflow:hidden;
-    transition:max-height .4s var(--ease);
+    transition:max-height .5s var(--ease);
   }
   .faq-a p{
-    padding:0 4px 24px;
-    max-width:640px;
+    padding:0 8px 32px;
+    max-width:700px;
     color:var(--c-charcoal-soft);
-    font-size:.95rem;
+    font-size:.98rem;
+    line-height: 1.7;
   }
 
   /* ---------- LIGHTBOX ---------- */
   .lightbox{
     position:fixed; inset:0; z-index:200;
-    background:rgba(20,19,18,.92);
+    background:rgba(18,17,16,.96);
     display:flex; align-items:center; justify-content:center;
     opacity:0; visibility:hidden;
-    transition:opacity .3s var(--ease), visibility .3s;
+    transition:opacity .4s var(--ease), visibility .4s;
     padding:40px;
   }
   .lightbox.open{ opacity:1; visibility:visible; }
   .lightbox-inner{
-    max-width:560px; width:100%;
+    max-width:600px; width:100%;
   }
   .lightbox-figure{
     aspect-ratio:1/1;
@@ -501,60 +503,64 @@
   .lightbox-figure img{ width:100%; height:100%; object-fit:cover; }
   .lightbox-info{
     color:var(--c-cream);
-    margin-top:18px;
+    margin-top:24px;
     display:flex;
     justify-content:space-between;
     align-items:flex-start;
   }
-  .lightbox-info h3{ font-family:'Fraunces', serif; font-weight:500; font-size:1.2rem; }
-  .lightbox-info .tag{ font-family:'Space Mono', monospace; font-size:.72rem; color:var(--c-wood-light); text-transform:uppercase; letter-spacing:.05em; }
+  .lightbox-info h3{ font-family:'Fraunces', serif; font-weight:400; font-size:1.3rem; letter-spacing: -.01em; }
+  .lightbox-info .tag{ font-family:'Space Mono', monospace; font-size:.75rem; color:var(--c-wood-light); text-transform:uppercase; letter-spacing:.08em; }
   .lightbox-close{
-    position:absolute; top:28px; right:32px;
-    width:40px; height:40px;
+    position:absolute; top:32px; right:40px;
+    width:48px; height:48px;
     border-radius:50%;
-    background:rgba(250,248,245,.1);
+    background:rgba(251,251,250,.08);
     color:var(--c-white);
-    font-size:1.4rem;
+    font-size:1.6rem;
     display:flex; align-items:center; justify-content:center;
+    transition: background .3s;
   }
+  .lightbox-close:hover{ background: rgba(251,251,250, .2); }
 
   .card-spec{
     position:absolute; inset:0;
-    background:rgba(43,42,40,.86);
+    background:rgba(28,27,26,.92);
     color:var(--c-cream);
     display:flex; flex-direction:column; justify-content:flex-end;
-    padding:18px;
+    padding:24px;
     opacity:0;
-    transition:opacity .35s var(--ease);
+    transition:opacity .4s var(--ease);
   }
   .card:hover .card-spec{ opacity:1; }
-  .card-spec .mono{ font-size:.72rem; letter-spacing:.05em; opacity:.85; margin-bottom:4px;}
+  .card-spec .mono{ font-size:.75rem; letter-spacing:.06em; opacity:.75; margin-bottom:6px;}
 
   .card-info{
-    padding:20px 22px 26px;
+    padding:20px 4px 10px; /* Limpiamos los márgenes internos para alinearse perfectamente con la estructura */
     display:flex;
     justify-content:space-between;
     align-items:flex-start;
-    gap:10px;
+    gap:16px;
   }
   .card-info h3{
     font-family:'Fraunces', serif;
-    font-weight:500;
-    font-size:1.12rem;
+    font-weight:400;
+    font-size:1.18rem;
+    letter-spacing: -.01em;
   }
   .card-info .tag{
     font-family:'Space Mono', monospace;
-    font-size:.68rem;
+    font-size:.7rem;
     letter-spacing:.08em;
     text-transform:uppercase;
     color:var(--c-wood-dark);
     display:block;
-    margin-top:4px;
+    margin-top:6px;
   }
   .card-info .price{
     font-family:'Space Mono', monospace;
     font-weight:700;
     font-size:.95rem;
+    color: var(--c-charcoal-soft);
     white-space:nowrap;
   }
 
@@ -564,154 +570,167 @@
   }
   .proceso-grid{
     display:grid;
-    grid-template-columns:.9fr 1.1fr;
-    gap:70px;
+    grid-template-columns:1fr 1fr;
+    gap:90px;
     align-items:center;
   }
-  @media (max-width:860px){ .proceso-grid{ grid-template-columns:1fr; gap:40px;} }
+  @media (max-width:860px){ .proceso-grid{ grid-template-columns:1fr; gap:50px;} }
   .proceso-figure{
     aspect-ratio:4/5;
     overflow:hidden;
   }
   .proceso-figure img{ width:100%; height:100%; object-fit:cover; }
   .proceso h2{
-    font-size:clamp(1.9rem,3vw,2.5rem);
-    font-weight:500;
-    margin:14px 0 24px;
-    max-width:460px;
+    font-size:clamp(2rem,3.5vw,2.8rem);
+    font-weight:300;
+    margin:18px 0 32px;
+    max-width:500px;
+    line-height: 1.15;
   }
   .steps{ display:flex; flex-direction:column; }
   .step{
     display:grid;
-    grid-template-columns:56px 1fr;
-    gap:20px;
-    padding:22px 0;
+    grid-template-columns:64px 1fr;
+    gap:24px;
+    padding:28px 0;
     border-top:1px solid var(--c-line);
   }
   .step:first-child{ border-top:1px solid var(--c-line); }
   .step .n{
     font-family:'Space Mono', monospace;
-    font-size:.85rem;
+    font-size:.9rem;
     color:var(--c-wood-dark);
-    padding-top:3px;
+    font-weight: 700;
+    padding-top:2px;
   }
-  .step h4{ font-family:'Fraunces', serif; font-weight:500; font-size:1.08rem; margin-bottom:6px;}
-  .step p{ color:var(--c-charcoal-soft); font-size:.94rem; max-width:420px;}
+  .step h4{ font-family:'Fraunces', serif; font-weight:400; font-size:1.2rem; margin-bottom:8px;}
+  .step p{ color:var(--c-charcoal-soft); font-size:.96rem; max-width:460px; font-weight: 300;}
 
   /* ---------- TESTIMONIOS ---------- */
   .testi-grid{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:1px;
-    background:var(--c-line);
-    margin-top:50px;
+    gap:40px; /* Separación elegante en vez de bloques pegados */
+    background:transparent;
+    margin-top:60px;
   }
-  @media (max-width:860px){ .testi-grid{ grid-template-columns:1fr; } }
+  @media (max-width:860px){ .testi-grid{ grid-template-columns:1fr; gap:32px; } }
   .testi{
-    background:var(--c-white);
-    padding:40px 34px;
+    background:transparent;
+    border-left: 1px solid var(--c-line); /* Línea sutil de división editorial */
+    padding:10px 0 10px 32px;
   }
-  .testi .stars{ color:var(--c-wood-dark); font-size:.85rem; letter-spacing:2px; margin-bottom:18px;}
-  .testi p{ font-family:'Fraunces', serif; font-style:italic; font-size:1.08rem; line-height:1.5; color:var(--c-charcoal-soft);}
-  .testi .who{ margin-top:20px; font-family:'Space Mono', monospace; font-size:.75rem; letter-spacing:.05em; text-transform:uppercase; color:var(--c-charcoal); }
+  @media (max-width:860px) { .testi { padding:20px 0; border-left: none; border-top: 1px solid var(--c-line); } }
+  .testi .stars{ color:var(--c-wood-light); font-size:.85rem; letter-spacing:3px; margin-bottom:20px;}
+  .testi p{ font-family:'Fraunces', serif; font-style:italic; font-size:1.15rem; line-height:1.6; color:var(--c-charcoal-soft); font-weight: 300;}
+  .testi .who{ margin-top:24px; font-family:'Space Mono', monospace; font-size:.75rem; letter-spacing:.08em; text-transform:uppercase; color:var(--c-charcoal); }
 
   /* ---------- CONTACTO ---------- */
   .contacto{ background:var(--c-charcoal); color:var(--c-white); }
   .contacto .eyebrow{ color:var(--c-wood-light); }
   .contacto .eyebrow::before{ background:var(--c-wood-light); }
-  .contacto h2{ font-size:clamp(2rem,3.4vw,2.8rem); font-weight:500; margin:14px 0 20px; max-width:520px;}
+  .contacto h2{ font-size:clamp(2.2rem,4vw,3.2rem); font-weight:300; margin:18px 0 28px; max-width:580px; line-height:1.15;}
   .contacto-grid{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:70px;
-    margin-top:50px;
+    gap:90px;
+    margin-top:60px;
   }
-  @media (max-width:860px){ .contacto-grid{ grid-template-columns:1fr; gap:40px; } }
-  .info-list{ list-style:none; margin-top:30px; }
+  @media (max-width:860px){ .contacto-grid{ grid-template-columns:1fr; gap:50px; } }
+  .info-list{ list-style:none; margin-top:40px; }
   .info-list li{
-    padding:16px 0;
-    border-top:1px solid rgba(250,248,245,.14);
+    padding:20px 0;
+    border-top:1px solid rgba(251,251,250,.1);
     display:grid;
-    grid-template-columns:110px 1fr;
-    gap:16px;
-    font-size:.94rem;
+    grid-template-columns:120px 1fr;
+    gap:20px;
+    font-size:.98rem;
+    font-weight: 300;
   }
-  .info-list li:last-child{ border-bottom:1px solid rgba(250,248,245,.14); }
-  .info-list .k{ font-family:'Space Mono', monospace; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--c-wood-light); }
+  .info-list li:last-child{ border-bottom:1px solid rgba(251,251,250,.1); }
+  .info-list .k{ font-family:'Space Mono', monospace; font-size:.75rem; letter-spacing:.08em; text-transform:uppercase; color:var(--c-wood-light); }
 
-  .form-field{ margin-bottom:18px; }
-  .form-field label{ display:block; font-family:'Space Mono', monospace; font-size:.7rem; letter-spacing:.06em; text-transform:uppercase; margin-bottom:8px; color:rgba(250,248,245,.7); }
+  .form-field{ margin-bottom:24px; }
+  .form-field label{ display:block; font-family:'Space Mono', monospace; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; margin-bottom:10px; color:rgba(251,251,250,.6); }
   .form-field input, .form-field textarea{
     width:100%;
     background:transparent;
     border:none;
-    border-bottom:1px solid rgba(250,248,245,.3);
-    padding:10px 2px;
+    border-bottom:1px solid rgba(251,251,250,.24);
+    padding:12px 2px;
     color:var(--c-white);
     font-family:'Work Sans', sans-serif;
-    font-size:.98rem;
-    transition:border-color .3s;
+    font-size:1rem;
+    font-weight: 300;
+    transition:border-color .4s var(--ease);
   }
   .form-field input:focus, .form-field textarea:focus{
     outline:none;
     border-bottom-color:var(--c-wood-light);
   }
-  .form-field textarea{ resize:vertical; min-height:80px; }
+  .form-field textarea{ resize:vertical; min-height:100px; }
   .form-note{
-    margin-top:16px;
-    font-size:.82rem;
+    margin-top:20px;
+    font-size:.88rem;
+    font-family: 'Space Mono', monospace;
     color:var(--c-wood-light);
     display:none;
+    line-height: 1.5;
   }
   .form-note.show{ display:block; }
 
-  /* ---------- PANEL ADMIN (DEMO) ---------- */
+  /* ---------- PANEL ADMIN ---------- */
   .panel-link{
     display:inline-flex;
     align-items:center;
-    gap:8px;
+    gap:10px;
     font-family:'Space Mono', monospace;
     font-size:.76rem;
-    letter-spacing:.05em;
-    color:rgba(250,248,245,.55);
+    letter-spacing:.06em;
+    color:rgba(251,251,250,.45);
+    transition: color .3s;
   }
   .panel-link:hover{ color:var(--c-wood-light); }
-  .panel-link::before{ content:'●'; font-size:.5rem; color:var(--c-green); }
+  .panel-link::before{ content:'●'; font-size:.5rem; color:var(--c-wood-light); }
 
   .panel-overlay{
     position:fixed; inset:0;
-    background:rgba(20,19,18,.72);
+    background:rgba(18,17,16,.85);
     z-index:200;
     display:none;
     align-items:flex-start;
     justify-content:center;
-    padding:40px 20px;
+    padding:50px 24px;
     overflow-y:auto;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
   }
   .panel-overlay.open{ display:flex; }
   .panel-modal{
     background:var(--c-white);
     width:100%;
-    max-width:920px;
-    border-radius:4px;
+    max-width:960px;
+    border-radius:0px;
     overflow:hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,.3);
   }
   .panel-head{
     background:var(--c-charcoal);
     color:var(--c-white);
-    padding:26px 32px;
+    padding:32px 40px;
     display:flex;
     justify-content:space-between;
     align-items:flex-start;
-    gap:20px;
+    gap:24px;
   }
   .panel-head .eyebrow{ color:var(--c-wood-light); }
   .panel-head .eyebrow::before{ background:var(--c-wood-light); }
-  .panel-head h3{ font-family:'Fraunces', serif; font-weight:500; font-size:1.4rem; margin-top:10px; }
+  .panel-head h3{ font-family:'Fraunces', serif; font-weight:400; font-size:1.5rem; margin-top:12px; }
   .panel-close{
-    color:rgba(250,248,245,.7);
-    font-size:1.4rem;
+    color:rgba(251,251,250,.6);
+    font-size:1.6rem;
     line-height:1;
+    background: transparent;
   }
   .panel-close:hover{ color:var(--c-white); }
   .panel-stats{
@@ -722,69 +741,71 @@
   }
   .panel-stat{
     background:var(--c-cream);
-    padding:22px 28px;
+    padding:24px 40px;
   }
-  .panel-stat .num{ font-family:'Fraunces', serif; font-size:2rem; font-weight:600; }
-  .panel-stat .label{ font-family:'Space Mono', monospace; font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; color:var(--c-charcoal-soft); margin-top:4px; display:block;}
-  .panel-body{ padding:10px 32px 32px; }
-  .panel-table{ width:100%; border-collapse:collapse; }
+  .panel-stat .num{ font-family:'Fraunces', serif; font-size:2.2rem; font-weight:400; color: var(--c-charcoal); }
+  .panel-stat .label{ font-family:'Space Mono', monospace; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--c-charcoal-soft); margin-top:6px; display:block;}
+  .panel-body{ padding:20px 40px 40px; overflow-x: auto; }
+  .panel-table{ width:100%; border-collapse:collapse; min-width: 600px; }
   .panel-table th{
     text-align:left;
+    font-family:'Space Mono', monospace;
+    font-size:.68rem;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--c-charcoal-soft);
+    padding:16px 12px;
+    border-bottom:2px solid var(--c-charcoal);
+  }
+  .panel-table td{
+    padding:18px 12px;
+    border-bottom:1px solid var(--c-line);
+    font-size:.9rem;
+    vertical-align:top;
+  }
+  .panel-table td.msg{ max-width:280px; color:var(--c-charcoal-soft); line-height: 1.5; }
+  .badge{
     font-family:'Space Mono', monospace;
     font-size:.66rem;
     letter-spacing:.06em;
     text-transform:uppercase;
-    color:var(--c-charcoal-soft);
-    padding:14px 10px;
-    border-bottom:1px solid var(--c-line);
-  }
-  .panel-table td{
-    padding:16px 10px;
-    border-bottom:1px solid var(--c-line);
-    font-size:.88rem;
-    vertical-align:top;
-  }
-  .panel-table td.msg{ max-width:260px; color:var(--c-charcoal-soft); }
-  .badge{
-    font-family:'Space Mono', monospace;
-    font-size:.66rem;
-    letter-spacing:.05em;
-    text-transform:uppercase;
-    padding:5px 10px;
-    border-radius:20px;
+    padding:6px 12px;
+    border-radius:0px;
     display:inline-block;
     cursor:pointer;
+    font-weight: 700;
   }
-  .badge.nuevo{ background:rgba(63,75,58,.12); color:var(--c-green); }
-  .badge.atendido{ background:var(--c-line); color:var(--c-charcoal-soft); }
+  .badge.nuevo{ background:rgba(47,59,44,.1); color:var(--c-green); }
+  .badge.atendido{ background:var(--c-line); color:var(--c-charcoal-soft); font-weight: 400; }
   .panel-note{
-    margin-top:22px;
-    padding-top:18px;
+    margin-top:24px;
+    padding-top:20px;
     border-top:1px solid var(--c-line);
-    font-size:.82rem;
+    font-size:.85rem;
     color:var(--c-charcoal-soft);
+    font-family: 'Space Mono', monospace;
   }
 
   .login-box{
-    padding:44px 32px 40px;
-    max-width:340px;
+    padding:60px 40px;
+    max-width:380px;
     margin:0 auto;
     text-align:center;
   }
   .login-box h4{
     font-family:'Fraunces', serif;
-    font-weight:500;
-    font-size:1.2rem;
-    margin:12px 0 26px;
+    font-weight:400;
+    font-size:1.30rem;
+    margin:14px 0 32px;
   }
-  .form-field-light{ margin-bottom:16px; text-align:left; }
+  .form-field-light{ margin-bottom:20px; text-align:left; }
   .form-field-light label{
     display:block;
     font-family:'Space Mono', monospace;
-    font-size:.68rem;
+    font-size:.7rem;
     letter-spacing:.06em;
     text-transform:uppercase;
-    margin-bottom:7px;
+    margin-bottom:8px;
     color:var(--c-charcoal-soft);
   }
   .form-field-light input{
@@ -792,49 +813,48 @@
     background:transparent;
     border:none;
     border-bottom:1px solid var(--c-line);
-    padding:9px 2px;
+    padding:10px 2px;
     color:var(--c-charcoal);
     font-family:'Work Sans', sans-serif;
-    font-size:.95rem;
+    font-size:.98rem;
   }
   .form-field-light input:focus{ outline:none; border-bottom-color:var(--c-wood-dark); }
-  .login-box .btn{ width:100%; justify-content:center; margin-top:6px; }
+  .login-box .btn{ width:100%; justify-content:center; margin-top:12px; }
   .login-error{
     display:none;
-    margin-top:14px;
-    font-size:.8rem;
+    margin-top:16px;
+    font-size:.82rem;
+    font-family: 'Space Mono', monospace;
     color:#b3432f;
   }
   .login-error.show{ display:block; }
 
   /* ---------- FOOTER ---------- */
   footer{
-    padding:40px 0;
+    padding:60px 0;
     border-top:1px solid var(--c-line);
+    background: var(--c-white);
   }
   .foot-row{
     display:flex;
     justify-content:space-between;
     align-items:center;
     flex-wrap:wrap;
-    gap:14px;
-    font-size:.82rem;
+    gap:24px;
+    font-size:.85rem;
     color:var(--c-charcoal-soft);
   }
-  .foot-row .logo{ font-size:1.1rem; }
+  .foot-row .logo{ font-size:1.2rem; }
 
   @media (max-width:768px){
-    .hero-grid{ grid-template-columns:1fr; }
-    .hero{ padding-top:150px; }
+    .hero-grid{ grid-template-columns:1fr; gap:48px; }
+    .hero{ padding-top:160px; }
     .nav-links{ display:none; }
   }
 
   /* ================================================================
-     TÉCNICAS NUEVAS: cursor personalizado, botones magnéticos,
-     texto que se revela por palabra, cortina en fotos
+     LABORATORIO VISUAL (EFECTOS COMPLEMENTARIOS AISLADOS)
   ================================================================ */
-
-  /* ---- Cursor personalizado (solo en dispositivos con mouse) ---- */
   body.has-custom-cursor, body.has-custom-cursor a, body.has-custom-cursor button{ cursor:none; }
   .cursor-dot, .cursor-ring{
     position:fixed; top:0; left:0; z-index:9500;
@@ -843,177 +863,163 @@
     border-radius:50%;
   }
   .cursor-dot{
-    width:7px; height:7px;
+    width:6px; height:6px;
     background:var(--c-charcoal);
-    transition:opacity .2s var(--ease), background .25s var(--ease);
+    transition:opacity .25s var(--ease), background .3s var(--ease);
   }
   .cursor-ring{
-    width:38px; height:38px;
+    width:40px; height:40px;
     border:1px solid var(--c-charcoal);
-    opacity:.55;
-    transition:width .3s var(--ease-spring, var(--ease)), height .3s var(--ease-spring, var(--ease)),
-               opacity .2s var(--ease), border-color .25s var(--ease), background .25s var(--ease);
+    opacity:.45;
+    transition:width .4s cubic-bezier(0.175, 0.885, 0.32, 1.275), height .4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+               opacity .25s var(--ease), border-color .3s var(--ease), background .3s var(--ease);
   }
-  .cursor-ring.grow{ width:64px; height:64px; background:rgba(43,42,40,.06); }
+  .cursor-ring.grow{ width:68px; height:68px; background:rgba(28,27,26,.04); border-color: var(--c-wood-dark); }
   .cursor-ring.on-dark{ border-color:var(--c-white); }
   .cursor-dot.on-dark{ background:var(--c-white); }
   body.cursor-hidden .cursor-dot, body.cursor-hidden .cursor-ring{ opacity:0; }
 
-  /* ---- Texto revelado por palabra ---- */
-  .split-word{
-    display:inline-block;
-    overflow:hidden;
-    vertical-align:top;
-  }
-  .split-word span{
-    display:inline-block;
-    transform:translateY(110%);
-    transition:transform .7s var(--ease);
-  }
-  .split-word.in span{ transform:translateY(0); }
+  /* split animations */
+  .split-word{ display:inline-block; overflow:hidden; vertical-align:top; margin-right:0.22em; }
+  .split-word span{ display:inline-block; transform:translateY(110%); transition:transform .9s var(--ease); }
+  .split-word span.in{ transform:translateY(0); }
 
-  /* ---- Cortina de revelado sobre fotos ---- */
+  /* reveal photo curtain effect */
   .curtain{ position:relative; overflow:hidden; }
   .curtain::after{
     content:'';
     position:absolute; inset:0;
-    background:var(--c-charcoal);
-    transform:scaleX(1);
-    transform-origin:right;
-    transition:transform .9s var(--ease);
+    background:var(--c-cream);
+    transform:translateX(0);
+    transition:transform 1.4s cubic-bezier(0.76, 0, 0.24, 1);
     z-index:2;
   }
-  .curtain.in::after{ transform:scaleX(0); }
+  .contacto .curtain::after { background: var(--c-charcoal-soft); }
+  .curtain.in::after{ transform:translateX(101%); }
+  .curtain img{ transform:scale(1.12); transition:transform 1.6s var(--ease); }
+  .curtain.in img{ transform:scale(1); }
 </style>
 </head>
 <body>
 
-<div class="cursor-ring" id="cursorRing"></div>
-<div class="cursor-dot" id="cursorDot"></div>
-
 <div id="preloader">
+  <div class="logo"><em>RO</em>BLE</div>
   <div class="bar"></div>
-  <div class="logo display"><em>RO</em>BLE</div>
 </div>
 
-<header id="siteHeader">
+<header id="header">
   <div class="wrap nav">
     <a href="#" class="logo"><em>RO</em>BLE</a>
     <ul class="nav-links">
       <li><a href="#catalogo">Colección</a></li>
-      <li><a href="#proceso">Proceso</a></li>
-      <li><a href="#testimonios">Testimonios</a></li>
-      <li><a href="#contacto">Visítanos</a></li>
+      <li><a href="#proceso">El Taller</a></li>
+      <li><a href="#faq">Garantía</a></li>
+      <li><a href="#contacto">Contacto</a></li>
     </ul>
-    <a href="#contacto" class="btn btn-dark">Agenda una visita</a>
+    <a href="#contacto" class="btn btn-dark">Diseñar Proyecto</a>
+    <button class="nav-toggle" aria-label="Menú"></button>
   </div>
 </header>
 
-<!-- ================= HERO ================= -->
 <section class="hero">
   <div class="wrap">
     <div class="hero-grid">
-      <div class="reveal in">
-        <span class="eyebrow">Taller de carpintería · Est. 2011</span>
-        <h1 class="display">Muebles con <em>carácter</em>,<br>hechos para durar.</h1>
-        <p class="lead">Diseñamos y construimos pieza por pieza con maderas macizas de la región. Sin prisas, sin relleno: solo madera, forma y tiempo bien invertido.</p>
+      <div>
+        <span class="plan-badge">Ebanistería Certificada</span>
+        <h1 class="display split-text">Muebles con herencia: esculpidos para <em>trascender</em>.</h1>
+        <p class="lead">Creamos piezas únicas de madera maciza en el corazón de la región de Ocotlán. Sin prisas, sin tableros de aglomerado: solo materia noble, ensambles milenarios y un diseño concebido para durar generaciones.</p>
         <div class="hero-actions">
-          <a href="#catalogo" class="btn btn-dark">Ver colección</a>
-          <a href="#proceso" class="btn btn-outline">Cómo trabajamos</a>
+          <a href="#catalogo" class="btn btn-dark">Explorar Colección</a>
+          <a href="#proceso" class="btn btn-outline">Filosofía de Taller</a>
         </div>
       </div>
-      <div class="hero-figure reveal in">
+      <div class="hero-figure reveal">
         <div class="frame"></div>
         <div class="photo curtain" id="heroCurtain">
-          <img src="mueble1.jpg" alt="Sofá modular Tulum" onerror="this.parentElement.classList.add('img-fallback'); this.remove()">
+          <img src="mueble1.jpg" alt="Mobiliario artesanal premium ROBLE" onerror="this.parentElement.classList.add('img-fallback'); this.remove()">
         </div>
       </div>
     </div>
   </div>
-
   <div class="marquee-strip">
     <div class="marquee-track">
-      <span>Roble macizo</span><span>Nogal</span><span>Encino</span><span>Hecho a mano</span><span>Garantía 10 años</span><span>Madera certificada</span>
-      <span>Roble macizo</span><span>Nogal</span><span>Encino</span><span>Hecho a mano</span><span>Garantía 10 años</span><span>Madera certificada</span>
+      <span>Roble Macizo Seleccionado</span><span>Nogal Americano</span><span>Encino Blanco</span><span>Ensambles de Autor</span><span>Garantía Estructural de 10 Años</span><span>Madera Sustentable Certificada</span>
+      <span>Roble Macizo Seleccionado</span><span>Nogal Americano</span><span>Encino Blanco</span><span>Ensambles de Autor</span><span>Garantía Estructural de 10 Años</span><span>Madera Sustentable Certificada</span>
     </div>
   </div>
 </section>
 
-<!-- ================= ESTADISTICAS ================= -->
 <section class="stats">
   <div class="wrap">
     <div class="stats-grid">
       <div class="reveal">
         <div class="stat-num" data-count="14">0</div>
-        <div class="stat-label">Años de taller</div>
+        <div class="stat-label">Años de Tradición</div>
       </div>
       <div class="reveal">
         <div class="stat-num" data-count="620">0</div>
-        <div class="stat-label">Muebles entregados</div>
+        <div class="stat-label">Piezas Firmadas</div>
       </div>
       <div class="reveal">
         <div class="stat-num" data-count="98" data-suffix="%">0</div>
-        <div class="stat-label">Clientes satisfechos</div>
+        <div class="stat-label">Índice de Satisfacción</div>
       </div>
       <div class="reveal">
         <div class="stat-num" data-count="10" data-suffix=" años">0</div>
-        <div class="stat-label">De garantía</div>
+        <div class="stat-label">Garantía Escrita</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ================= CATALOGO ================= -->
 <section id="catalogo">
   <div class="wrap">
     <div class="cat-head">
       <div class="reveal">
-        <span class="eyebrow">Colección 2026</span>
-        <h2 class="display">Cada pieza cuenta<br>una historia de taller.</h2>
+        <span class="eyebrow">Catálogo de Autor 2026</span>
+        <h2 class="display">Líneas puras.<br>Geometrías atemporales.</h2>
       </div>
       <div class="filters reveal">
-        <button class="filter-btn active" data-filter="todos">Todos</button>
-        <button class="filter-btn" data-filter="sala">Sala</button>
+        <button class="filter-btn active" data-filter="todos">Ver Todo</button>
+        <button class="filter-btn" data-filter="sala">Área Social</button>
         <button class="filter-btn" data-filter="comedor">Comedor</button>
-        <button class="filter-btn" data-filter="recamara">Recámara</button>
-        <button class="filter-btn" data-filter="accesorios">Accesorios</button>
+        <button class="filter-btn" data-filter="recamara">Santuario / Dormitorio</button>
+        <button class="filter-btn" data-filter="accesorios">Complementos</button>
       </div>
     </div>
-
     <div class="grid" id="catalogGrid"></div>
   </div>
 </section>
 
-<!-- ================= PROCESO ================= -->
 <section id="proceso" class="proceso">
   <div class="wrap">
     <div class="proceso-grid">
       <div class="proceso-figure reveal curtain">
-        <img src="mueble2.jpg" alt="Detalle de mesa de encino" onerror="this.parentElement.classList.add('img-fallback'); this.remove()">
+        <img src="mueble2.jpg" alt="Detalle técnico ebanistería fina" onerror="this.parentElement.classList.add('img-fallback'); this.remove()">
       </div>
       <div class="reveal">
-        <span class="eyebrow">De la troza a tu casa</span>
-        <h2 class="display split-text">Tres pasos, ningún atajo.</h2>
+        <span class="eyebrow">La Devoción al Detalle</span>
+        <h2 class="display">El Manifiesto del Objeto Bien Hecho.</h2>
         <div class="steps">
           <div class="step">
-            <span class="n mono">01</span>
+            <div class="n">01</div>
             <div>
-              <h4>Selección de madera</h4>
-              <p>Elegimos trozas de roble, nogal y encino de proveedores forestales certificados, revisando veta y humedad una por una.</p>
+              <h4>Selección en Tronco Abierto</h4>
+              <p>Analizamos la veta y humedad natural de cada tablón. Solo las piezas con un dibujo y estabilidad perfecta entran al área de corte.</p>
             </div>
           </div>
           <div class="step">
-            <span class="n mono">02</span>
+            <div class="n">02</div>
             <div>
-              <h4>Ensamblaje artesanal</h4>
-              <p>Cada unión se corta y ensambla a mano en nuestro taller, sin tornillería vista ni prensados industriales.</p>
+              <h4>Arquitectura de Ensamble</h4>
+              <p>No ocultamos tornillos porque no los usamos. Recuperamos técnicas tradicionales de caja y espiga que distribuyen las fuerzas mecánicas con gracia eterna.</p>
             </div>
           </div>
           <div class="step">
-            <span class="n mono">03</span>
+            <div class="n">03</div>
             <div>
-              <h4>Acabado natural</h4>
-              <p>Sellamos con aceites naturales que resaltan la veta y protegen la pieza para generaciones de uso.</p>
+              <h4>Pulido y Aceites Orgánicos</h4>
+              <p>Protegemos la madera con ceras de abejas y aceites de linaza botánicos. El mueble respira, madura su color con los años y mantiene un tacto de seda vegetal.</p>
             </div>
           </div>
         </div>
@@ -1022,61 +1028,58 @@
   </div>
 </section>
 
-<!-- ================= TESTIMONIOS ================= -->
-<section id="testimonios">
+<section class="testimonios">
   <div class="wrap">
-    <div class="reveal" style="text-align:center;">
-      <span class="eyebrow" style="justify-content:center;">Lo que dicen nuestros clientes</span>
-      <h2 class="display split-text" style="font-size:clamp(1.9rem,3vw,2.5rem); font-weight:500; margin-top:14px;">Piezas que se quedan en la familia</h2>
+    <div class="reveal" style="text-align:center; margin-bottom: 20px;">
+      <span class="eyebrow" style="justify-content:center;">Resonancia</span>
+      <h2 class="display" style="font-size:clamp(2rem,3.4vw,2.8rem); margin-top:14px;">Habitar un ROBLE</h2>
     </div>
     <div class="testi-grid">
       <div class="testi reveal">
-        <div class="stars">★★★★★</div>
-        <p>“La mesa de encino que hicieron para nuestro comedor es la primera cosa que la gente pregunta cuando entra a la casa.”</p>
+        <div class="stars">✦✦✦✦✦</div>
+        <p>“Su mesa de encino transformó el comedor por completo. No es un objeto decorativo, se siente como una escultura maciza que ancla toda la casa.”</p>
         <div class="who">Renata O. — Guadalajara</div>
       </div>
       <div class="testi reveal">
-        <div class="stars">★★★★★</div>
-        <p>“Pedimos un closet a medida y llegó exacto a los milímetros que necesitábamos. Cero relleno, todo funcional.”</p>
+        <div class="stars">✦✦✦✦✦</div>
+        <p>“Solicitamos una credenza con medidas milimétricas especiales. La precisión de los encajes y el aroma a madera viva que trajo al estudio es inigualable.”</p>
         <div class="who">Julián M. — Zapopan</div>
       </div>
       <div class="testi reveal">
-        <div class="stars">★★★★★</div>
-        <p>“Tres años con el sofá Tulum y sigue como el primer día. Se nota que no es mueble de aglomerado.”</p>
+        <div class="stars">✦✦✦✦✦</div>
+        <p>“Llevamos tres años con el sofá modular Tulum y su firmeza estructural permanece intacta. Es la gran diferencia de invertir en ebanistería real.”</p>
         <div class="who">Carla D. — Ocotlán</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ================= CONTACTO ================= -->
-<!-- ================= FAQ ================= -->
 <section id="faq">
   <div class="wrap">
     <div class="reveal" style="text-align:center;">
-      <span class="eyebrow" style="justify-content:center;">Antes de escribirnos</span>
-      <h2 class="display split-text" style="font-size:clamp(1.9rem,3vw,2.5rem); font-weight:500; margin-top:14px;">Preguntas frecuentes</h2>
+      <span class="eyebrow" style="justify-content:center;">Transparencia</span>
+      <h2 class="display split-text" style="font-size:clamp(2rem,3.5vw,2.8rem); margin-top:14px;">Consultas Frecuentes</h2>
     </div>
     <div class="faq-list">
       <div class="faq-item reveal">
-        <button class="faq-q"><span>¿Hacen muebles a medida?</span><span class="icon"></span></button>
-        <div class="faq-a"><p>Sí, la mayoría de nuestras piezas se pueden ajustar en medidas y acabado. Cuéntanos el espacio que tienes y te decimos qué es posible.</p></div>
+        <button class="faq-q"><span>¿Es posible personalizar las dimensiones del catálogo?</span><span class="icon"></span></button>
+        <div class="faq-a"><p>Por supuesto. Al ser un taller boutique, adaptamos longitudes, profundidades y tonalidades de veta a las necesidades específicas de tu plano arquitectónico.</p></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q"><span>¿Cuánto tarda un pedido a medida?</span><span class="icon"></span></button>
-        <div class="faq-a"><p>Entre 3 y 6 semanas dependiendo de la pieza, porque cada mueble se construye desde cero en nuestro taller.</p></div>
+        <button class="faq-q"><span>¿Cuál es el tiempo de maduración y fabricación de un pedido?</span><span class="icon"></span></button>
+        <div class="faq-a"><p>Nuestros tiempos oscilan entre las 3 y 6 semanas. Respetamos los lapsos naturales de estabilización de la madera y el ensamblado a mano para blindar la calidad de la pieza.</p></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q"><span>¿Hacen envíos fuera de Jalisco?</span><span class="icon"></span></button>
-        <div class="faq-a"><p>Sí, coordinamos envío a todo México con paquetería especializada en muebles. El costo se cotiza según destino y tamaño.</p></div>
+        <button class="faq-q"><span>¿Cuentan con cobertura de logística nacional?</span><span class="icon"></span></button>
+        <div class="faq-a"><p>Sí. Coordinamos transportación especializada en piezas de arte y mobiliario pesado con embalaje de alta amortiguación a cualquier estado de la República Mexicana.</p></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q"><span>¿Cómo cuido la madera con el tiempo?</span><span class="icon"></span></button>
-        <div class="faq-a"><p>Con un paño húmedo y, cada 6-12 meses, aceite natural para madera. Nada de productos con silicón, opacan el acabado.</p></div>
+        <button class="faq-q"><span>¿Qué mantenimiento demanda una superficie de madera maciza?</span><span class="icon"></span></button>
+        <div class="faq-a"><p>Basta con limpieza en seco o un paño milimétricamente húmedo. Recomendamos nutrirla con bálsamo natural cada año. Evita por completo siliconas o limpiadores sintéticos comerciales.</p></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q"><span>¿Tienen garantía?</span><span class="icon"></span></button>
-        <div class="faq-a"><p>10 años en estructura contra defectos de fabricación. El desgaste natural del uso diario no está cubierto, es parte del carácter de la madera.</p></div>
+        <button class="faq-q"><span>¿En qué consiste la garantía de 10 años?</span><span class="icon"></span></button>
+        <div class="faq-a"><p>Cubre cualquier movimiento molecular anómalo, deformación estructural o fallo de ensamble. El noble envejecimiento de la veta no es un defecto; es la firma del tiempo sobre la madera viva.</p></div>
       </div>
     </div>
   </div>
@@ -1086,33 +1089,33 @@
   <div class="wrap">
     <div class="contacto-grid">
       <div class="reveal">
-        <span class="eyebrow">Visítanos</span>
-        <h2 class="display">Ven a tocar la madera<br>antes de decidir.</h2>
-        <p style="max-width:420px; color:rgba(250,248,245,.75);">Nuestra sala de exhibición está abierta toda la semana. Sin cita para visitas rápidas, con cita para asesoría de proyectos a medida.</p>
+        <span class="eyebrow">El Espacio Físico</span>
+        <h2 class="display">Siente el peso y la textura de la materia.</h2>
+        <p style="max-width:440px; color:rgba(251,251,250,.75); font-weight: 300;">Nuestra casa de exhibición colinda directamente con las áreas de pulido del taller. Ven a presenciar el oficio de los maestros ebanistas de la zona.</p>
         <ul class="info-list">
-          <li><span class="k">Dirección</span><span>Av. de los Encinos 214, Col. Las Fuentes, Ocotlán, Jalisco</span></li>
-          <li><span class="k">Horario</span><span>Lun–Vie 10:00–19:00 · Sáb 10:00–15:00</span></li>
-          <li><span class="k">Teléfono</span><span>(392) 555 0148</span></li>
-          <li><span class="k">Correo</span><span>hola@roble-muebles.mx</span></li>
+          <li><span class="k">Atelier</span><span>Calle de los Artesanos 402, Zona Centro · Ocotlán, Jalisco</span></li>
+          <li><span class="k">Horarios</span><span>Lunes a Viernes: 09:00 a 18:35 · Sábados: 10:00 a 14:00</span></li>
+          <li><span class="k">Directo</span><span>hola@roblemuebles.com · Tel: 392 123 4567</span></li>
         </ul>
-        <p style="margin-top:24px;"><a href="#" class="panel-link" id="openPanel">Ver panel de mensajes recibidos (demo)</a></p>
       </div>
       <div class="reveal">
+        <span class="eyebrow">Iniciar una Comisión</span>
+        <h2 class="display" style="font-size: 1.8rem; margin-bottom: 32px;">Platícanos tu idea de espacio.</h2>
         <form id="contactForm">
           <div class="form-field">
-            <label for="nombre">Nombre</label>
-            <input type="text" id="nombre" required placeholder="¿Cómo te llamas?">
+            <label for="nombre">Nombre Completo</label>
+            <input type="text" id="nombre" required placeholder="Ej. Alejandro Silva">
           </div>
           <div class="form-field">
-            <label for="correo">Correo</label>
-            <input type="email" id="correo" required placeholder="tu@correo.com">
+            <label for="correo">Dirección de Correo</label>
+            <input type="email" id="correo" required placeholder="alejandro@correo.com">
           </div>
           <div class="form-field">
-            <label for="mensaje">Cuéntanos tu proyecto</label>
-            <textarea id="mensaje" required placeholder="Espacio, medidas aproximadas, estilo que buscas..."></textarea>
+            <label for="mensaje">Especificaciones del Proyecto</label>
+            <textarea id="mensaje" required placeholder="Describe las dimensiones aproximadas, maderas de preferencia (Nogal, Encino, Roble) o la atmósfera que deseas proyectar..."></textarea>
           </div>
-          <button type="submit" class="btn btn-dark" style="margin-top:8px;">Enviar mensaje</button>
-          <p class="form-note" id="formNote">Gracias — es una página de demostración, así que este formulario no envía datos reales todavía.</p>
+          <button type="submit" class="btn btn-dark" style="margin-top:12px;">Enviar a Taller</button>
+          <p class="form-note" id="formNote">Procesando envío corporativo...</p>
         </form>
       </div>
     </div>
@@ -1122,14 +1125,15 @@
 <footer>
   <div class="wrap foot-row">
     <a href="#" class="logo"><em>RO</em>BLE</a>
-    <span>© 2026 Roble Muebles. Página de demostración — información ficticia.</span>
-    <span>Ocotlán, Jalisco · México</span>
+    <span>© 2026 Roble Muebles de Autor. Creado bajo altos estándares de manufactura.</span>
+    <div>
+      <a href="#" id="openPanel" class="panel-link">Consola de Mando</a>
+    </div>
   </div>
 </footer>
 
-<!-- ================= LIGHTBOX DE PRODUCTO ================= -->
 <div class="lightbox" id="lightbox">
-  <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar">&times;</button>
+  <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar Imagen">&times;</button>
   <div class="lightbox-inner">
     <div class="lightbox-figure" id="lightboxFigure"></div>
     <div class="lightbox-info">
@@ -1142,130 +1146,135 @@
   </div>
 </div>
 
-<!-- ================= BOTONES FLOTANTES ================= -->
-<a href="#" id="whatsappFloat" class="whatsapp-float" aria-label="Escríbenos por WhatsApp" target="_blank">
-  <span class="ping"></span>
-  <svg viewBox="0 0 32 32" fill="white"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.386.7 4.61 1.902 6.482L4 29l7.72-1.865A11.94 11.94 0 0 0 16.001 27C22.629 27 28 21.627 28 15S22.629 3 16.001 3zm0 21.818c-2.05 0-3.953-.6-5.556-1.633l-.398-.243-4.583 1.107 1.127-4.463-.26-.412A9.77 9.77 0 0 1 5.182 15c0-5.964 4.855-10.818 10.819-10.818S26.818 9.036 26.818 15 21.965 24.818 16.001 24.818zm5.892-8.114c-.322-.161-1.906-.94-2.201-1.048-.295-.108-.51-.161-.725.161-.215.322-.833 1.048-1.021 1.263-.188.215-.376.242-.698.081-.322-.161-1.36-.501-2.591-1.598-.958-.854-1.605-1.908-1.793-2.23-.188-.322-.02-.496.141-.657.145-.144.322-.376.483-.564.161-.188.215-.322.322-.537.108-.215.054-.403-.027-.564-.081-.161-.725-1.747-.993-2.393-.262-.629-.528-.544-.725-.554-.188-.009-.403-.011-.618-.011-.215 0-.564.081-.859.403-.295.322-1.128 1.103-1.128 2.689 0 1.586 1.155 3.118 1.316 3.333.161.215 2.273 3.472 5.507 4.869.77.332 1.37.53 1.838.679.772.246 1.475.211 2.031.128.62-.092 1.906-.779 2.174-1.531.269-.752.269-1.397.188-1.531-.081-.134-.295-.215-.618-.376z"/></svg>
-</a>
-<button class="to-top" id="toTop" aria-label="Regresar arriba">
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
-</button>
-
 <div class="panel-overlay" id="panelOverlay">
   <div class="panel-modal">
     <div class="panel-head">
       <div>
-        <span class="eyebrow">Panel del negocio</span>
-        <h3 class="display">Mensajes recibidos</h3>
+        <span class="eyebrow">Consola del Sistema</span>
+        <h3>Buzón de Solicitudes de Ebanistería</h3>
       </div>
-      <button class="panel-close" id="closePanel" aria-label="Cerrar">&times;</button>
+      <button class="panel-close" id="panelClose" aria-label="Cerrar Consola">&times;</button>
     </div>
-
-    <div id="loginBox" class="login-box">
-      <span class="eyebrow" style="color:var(--c-wood-dark);">Acceso administrador</span>
-      <h4>Inicia sesión para ver los mensajes</h4>
-      <div class="form-field-light">
-        <label for="loginEmail">Correo</label>
-        <input type="email" id="loginEmail" placeholder="admin@tunegocio.com">
+    
+    <div class="panel-stats">
+      <div class="panel-stat">
+        <span class="num" id="statTotal">0</span>
+        <span class="label">Mensajes Históricos</span>
       </div>
-      <div class="form-field-light">
-        <label for="loginPassword">Contraseña</label>
-        <input type="password" id="loginPassword" placeholder="••••••••">
+      <div class="panel-stat">
+        <span class="num" id="statNuevos">0</span>
+        <span class="label">Por Revisar</span>
       </div>
-      <button class="btn btn-dark" id="loginBtn" type="button">Entrar</button>
-      <p class="login-error" id="loginError">Correo o contraseña incorrectos.</p>
+      <div class="panel-stat">
+        <span class="num" id="statHoy">0</span>
+        <span class="label">Ingresados Hoy</span>
+      </div>
     </div>
-
-    <div id="panelContent" style="display:none;">
-      <div class="panel-stats">
-        <div class="panel-stat"><span class="num" id="statTotal">0</span><span class="label">Mensajes totales</span></div>
-        <div class="panel-stat"><span class="num" id="statNuevos">0</span><span class="label">Sin atender</span></div>
-        <div class="panel-stat"><span class="num" id="statHoy">0</span><span class="label">Recibidos hoy</span></div>
+    
+    <div class="panel-body">
+      <div id="panelEmpty" class="panel-note" style="text-align:center; padding: 40px 0;">
+        No hay registros almacenados en el servidor remoto de Supabase actualmente.
       </div>
-      <div class="panel-body">
-        <table class="panel-table">
-          <thead>
-            <tr><th>Fecha</th><th>Nombre</th><th>Correo</th><th>Mensaje</th><th>Estado</th></tr>
-          </thead>
-          <tbody id="panelBody"></tbody>
-        </table>
-        <p class="panel-note" id="panelEmpty" style="display:none;">Aún no hay mensajes. Llena el formulario de contacto para ver cómo se guarda uno aquí.</p>
-        <p class="panel-note">Mensajes guardados en la base de datos del negocio, visibles solo con una cuenta de administrador.</p>
-        <button class="btn btn-outline" id="logoutBtn" type="button" style="margin-top:18px;">Cerrar sesión</button>
-      </div>
+      
+      <table class="panel-table" id="panelTable">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Prospecto</th>
+            <th>Contacto</th>
+            <th>Especificaciones</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody id="panelBody">
+          </tbody>
+      </table>
+      
+      <p class="panel-note">🔒 Sesión encriptada mediante Supabase Auth. Haz clic sobre las etiquetas para cambiar el estatus operativo.</p>
     </div>
   </div>
 </div>
+
+<a href="#" id="whatsappFloat" class="whatsapp-float" aria-label="Canal directo WhatsApp" target="_blank">
+  <span class="ping"></span>
+  <svg viewBox="0 0 32 32" fill="white">
+    <path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.386.7 4.61 1.902 6.482L4 29l7.72-1.865A11.94 11.94 0 0 0 16.001 27C22.629 27 28 21.627 28 15S22.629 3 16.001 3zm0 21.818c-2.05 0-3.953-.6-5.556-1.633l-.398-.243-4.583 1.107 1.127-4.463-.26-.412A9.77 9.77 0 0 1 5.182 15c0-5.964 4.855-10.818 10.819-10.818S26.818 9.036 26.818 15 21.965 24.818 16.001 24.818zm5.892-8.114c-.322-.16-.192-.24-.53-.623-.11-.123-.584-.764-.674-.88-.09-.115-.175-.164-.29-.098-.115.065-.584.23-.715.344-.13.115-.262.13-.393.065-.13-.065-.557-.206-1.06-.656-.393-.35-1.03-.787-1.128-.967-.1-.18-.01-.28.08-.37.08-.08.197-.23.295-.344.1-.115.13-.197.197-.328.066-.13.033-.246-.016-.344-.05-.098-.443-1.066-.607-1.46-.16-.393-.337-.34-.46-.34-.122 0-.262-.016-.403-.016-.14 0-.368.05-.56.262-.193.213-.738.72-.738 1.754s.754 2.033.86 2.18c.107.148 1.484 2.263 3.596 3.173.503.217.896.347 1.2.443.505.16.964.137 1.327.083.404-.06 1.24-.508 1.414-.997.175-.492.175-.915.123-.997-.05-.082-.19-.13-.513-.29z"/>
+  </svg>
+</a>
+
+<button id="toTop" class="to-top" aria-label="Subir al inicio">▲</button>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
 <script>
   // ---- Datos del catálogo (ficticios) ----
   const productos = [
-    { img:'mueble1.jpg',  nombre:'Sofá modular Tulum',   cat:'sala',       tag:'Roble macizo',            precio:'$28,400', dim:'240 × 95 × 80 cm' },
-    { img:'mueble2.jpg',  nombre:'Mesa Encino Vivo',      cat:'comedor',    tag:'Encino',                  precio:'$34,900', dim:'200 × 95 × 76 cm' },
-    { img:'mueble3.jpg',  nombre:'Cama Nómade',           cat:'recamara',   tag:'Nogal',                   precio:'$22,600', dim:'160 × 200 cm' },
-    { img:'mueble4.jpg',  nombre:'Sillón Aurora',         cat:'sala',       tag:'Roble',                   precio:'$14,200', dim:'85 × 90 × 95 cm' },
-    { img:'mueble5.jpg',  nombre:'Set de sillas Junco',   cat:'comedor',    tag:'Bambú y roble · x4',      precio:'$18,800', dim:'45 × 55 × 88 cm c/u' },
-    { img:'mueble6.jpg',  nombre:'Buró Cobre',            cat:'accesorios', tag:'Nogal con detalle cobre', precio:'$6,300',  dim:'45 × 40 × 55 cm' },
-    { img:'mueble7.jpg',  nombre:'Closet Alba',           cat:'recamara',   tag:'Encino',                  precio:'$41,500', dim:'180 × 60 × 220 cm' },
-    { img:'mueble8.jpg',  nombre:'Mesa de centro Deriva', cat:'sala',       tag:'Roble reciclado',         precio:'$9,750',  dim:'110 × 60 × 40 cm' },
-    { img:'mueble9.jpg',  nombre:'Vitrina Ocote',         cat:'comedor',    tag:'Ocote',                   precio:'$26,300', dim:'120 × 45 × 190 cm' },
-    { img:'mueble10.jpg', nombre:'Espejo Luna',           cat:'accesorios', tag:'Marco de nogal',          precio:'$5,400',  dim:'70 × 90 cm' },
+    { img:'mueble1.jpg', nombre:'Sofá modular Tulum', cat:'sala', tag:'Roble macizo', precio:'$28,400', dim:'240 × 95 × 80 cm' },
+    { img:'mueble2.jpg', nombre:'Mesa Encino Vivo', cat:'comedor', tag:'Encino', precio:'$34,900', dim:'200 × 95 × 76 cm' },
+    { img:'mueble3.jpg', nombre:'Cama Nómade', cat:'recamara', tag:'Nogal', precio:'$22,600', dim:'160 × 200 cm' },
+    { img:'mueble4.jpg', nombre:'Sillón Aurora', cat:'sala', tag:'Roble', precio:'$14,200', dim:'85 × 90 × 95 cm' },
+    { img:'mueble5.jpg', nombre:'Set de sillas Junco', cat:'comedor', tag:'Bambú y roble · x4', precio:'$18,800', dim:'45 × 55 × 88 cm c/u' },
+    { img:'mueble6.jpg', nombre:'Buró Cobre', cat:'accesorios', tag:'Nogal con detalle cobre', precio:'$6,300', dim:'45 × 40 × 55 cm' },
+    { img:'mueble7.jpg', nombre:'Closet Alba', cat:'recamara', tag:'Encino', precio:'$41,500', dim:'180 × 60 × 220 cm' },
+    { img:'mueble8.jpg', nombre:'Mesa de centro Deriva', cat:'sala', tag:'Roble reciclado', precio:'$9,750', dim:'110 × 60 × 40 cm' },
+    { img:'mueble9.jpg', nombre:'Vitrina Ocote', cat:'comedor', tag:'Ocote', precio:'$26,300', dim:'120 × 45 × 190 cm' },
+    { img:'mueble10.jpg', nombre:'Espejo Luna', cat:'accesorios', tag:'Marco de nogal', precio:'$5,400', dim:'70 × 90 cm' },
   ];
 
-  const catLabel = { sala:'Sala', comedor:'Comedor', recamara:'Recámara', accesorios:'Accesorios' };
-  const NEGOCIO_WHATSAPP = '523921266110';
+  const catLabel = { sala:'Área Social', comedor:'Comedor', recamara:'Santuario', accesorios:'Complementos' };
+  const NEGOCIO_WHATSAPP = '523223067160';
 
+  // ---- Inyectar catálogo dinámico ----
   const grid = document.getElementById('catalogGrid');
-  grid.innerHTML = productos.map((p, i) => `
-    <div class="card reveal" data-cat="${p.cat}" data-idx="${i}" style="transition-delay:${(i % 3) * 60}ms">
-      <div class="card-figure">
-        <img src="${p.img}" alt="${p.nombre}" onerror="this.parentElement.classList.add('img-fallback'); this.outerHTML='<span>'+ '${p.img}'.toUpperCase() +'</span>'">
-        <div class="card-spec">
-          <span class="mono">${p.tag}</span>
-          <span class="mono">${p.dim}</span>
+  function renderCatalog(filter = 'todos'){
+    if (!grid) return;
+    grid.innerHTML = '';
+    productos.forEach((p, idx) => {
+      if(filter !== 'todos' && p.cat !== filter) return;
+      const card = document.createElement('div');
+      card.className = 'card reveal in';
+      card.dataset.idx = idx;
+      card.innerHTML = `
+        <div class="card-figure">
+          <img src="${p.img}" alt="${p.nombre}" onerror="this.parentElement.classList.add('img-fallback'); this.remove()">
+          <div class="card-spec">
+            <p class="mono">${p.dim}</p>
+            <p class="mono" style="font-size:.68rem; color:var(--c-wood-light);">Hacer clic para ampliar</p>
+          </div>
         </div>
-      </div>
-      <div class="card-info">
-        <div>
-          <h3>${p.nombre}</h3>
-          <span class="tag">${catLabel[p.cat]}</span>
+        <div class="card-info">
+          <div>
+            <h3>${p.nombre}</h3>
+            <span class="tag">${p.tag}</span>
+          </div>
+          <span class="price mono">${p.precio}</span>
         </div>
-        <span class="price mono">${p.precio}</span>
-      </div>
-    </div>
-  `).join('');
+      `;
+      grid.appendChild(card);
+    });
+  }
+  renderCatalog();
 
-  // ---- Filtros ----
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
+  // ---- Manejo de filtros ----
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      const f = btn.dataset.filter;
-      document.querySelectorAll('.card').forEach(card => {
-        const match = f === 'todos' || card.dataset.cat === f;
-        card.classList.toggle('hide', !match);
-      });
+      renderCatalog(btn.dataset.filter);
     });
   });
 
-  // ---- Header al hacer scroll ----
-  const header = document.getElementById('siteHeader');
-  window.addEventListener('scroll', () => {
-    header.classList.toggle('scrolled', window.scrollY > 40);
-  });
-
-  // ---- Revelado al hacer scroll ----
-  const observer = new IntersectionObserver((entries) => {
+  // ---- Revelado al hacer scroll (Intersection Observer) ----
+  const revObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('in');
+      if(entry.isIntersecting){
+        entry.target.classList.add('in');
+      }
     });
-  }, { threshold: 0.15 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => revObserver.observe(el));
 
-  // ---- Preloader: se oculta cuando la página termina de cargar ----
+  // ---- Desvanecer Preloader ----
   window.addEventListener('load', () => {
     setTimeout(() => {
       const pre = document.getElementById('preloader');
@@ -1273,48 +1282,49 @@
     }, 500);
   });
 
-  // ---- Botón flotante de WhatsApp: usa el mismo número del negocio ----
+  // ---- Configurar botón flotante inicial ----
   const whatsappFloat = document.getElementById('whatsappFloat');
   if (whatsappFloat) {
-    whatsappFloat.href = `https://wa.me/${NEGOCIO_WHATSAPP}?text=${encodeURIComponent('Hola, vi su página y quiero más información.')}`;
+    whatsappFloat.href = `https://wa.me/${NEGOCIO_WHATSAPP}?text=${encodeURIComponent('Hola, vi su catálogo exclusivo y me interesa cotizar una pieza a medida.')}`;
   }
 
-  // ---- Botón "regresar arriba" ----
+  // ---- Botón regresar arriba ----
   const toTopBtn = document.getElementById('toTop');
   window.addEventListener('scroll', () => {
     toTopBtn.classList.toggle('show', window.scrollY > 500);
   });
   toTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-  // ---- Efecto 3D (tilt) al pasar el mouse sobre las fotos del catálogo ----
+  // ---- Efecto 3D Tilt ----
   document.querySelectorAll('.card-figure').forEach(fig => {
     fig.addEventListener('mousemove', (e) => {
       const rect = fig.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width - 0.5;
       const y = (e.clientY - rect.top) / rect.height - 0.5;
-      fig.style.transform = `rotateY(${x * 10}deg) rotateX(${-y * 10}deg)`;
+      fig.style.transform = `rotateY(${x * 8}deg) rotateX(${-y * 8}deg)`;
     });
     fig.addEventListener('mouseleave', () => {
       fig.style.transform = 'rotateY(0deg) rotateX(0deg)';
     });
   });
 
-  // ---- Lightbox: ver la foto del producto en grande al hacer clic ----
+  // ---- Lightbox ----
   function abrirLightbox(idx) {
     const p = productos[idx];
     if (!p) return;
-    document.getElementById('lightboxFigure').innerHTML =
-      `<img src="${p.img}" alt="${p.nombre}" onerror="this.parentElement.classList.add('img-fallback'); this.outerHTML='<span>'+ '${p.img}'.toUpperCase() +'</span>'">`;
+    document.getElementById('lightboxFigure').innerHTML = `<img src="${p.img}" alt="${p.nombre}" onerror="this.parentElement.classList.add('img-fallback'); this.outerHTML='<span>'+ '${p.img}'.toUpperCase() +'</span>'">`;
     document.getElementById('lightboxNombre').textContent = p.nombre;
     document.getElementById('lightboxTag').textContent = `${catLabel[p.cat]} · ${p.tag} · ${p.dim}`;
     document.getElementById('lightboxPrecio').textContent = p.precio;
     document.getElementById('lightbox').classList.add('open');
   }
-  grid.addEventListener('click', (e) => {
-    const card = e.target.closest('.card');
-    if (!card) return;
-    abrirLightbox(+card.dataset.idx);
-  });
+  if(grid){
+    grid.addEventListener('click', (e) => {
+      const card = e.target.closest('.card');
+      if (!card) return;
+      abrirLightbox(+card.dataset.idx);
+    });
+  }
   document.getElementById('lightboxClose').addEventListener('click', () => {
     document.getElementById('lightbox').classList.remove('open');
   });
@@ -1322,67 +1332,68 @@
     if (e.target.id === 'lightbox') e.target.classList.remove('open');
   });
 
-  // ---- Contador animado de estadísticas ----
+  // ---- Animación del contador estadístico ----
   function animarContador(el) {
     const target = parseInt(el.dataset.count, 10);
     const suffix = el.dataset.suffix || '';
-    const duration = 1400;
+    const duration = 1600;
     const start = performance.now();
     function tick(now) {
       const progress = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
+      const eased = 1 - Math.pow(1 - progress, 4);
       el.textContent = Math.round(target * eased) + suffix;
       if (progress < 1) requestAnimationFrame(tick);
     }
     requestAnimationFrame(tick);
   }
-  const statsObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        animarContador(entry.target);
-        statsObserver.unobserve(entry.target);
+  const statsSection = document.querySelector('.stats');
+  if(statsSection){
+    const statsObserver = new IntersectionObserver((entries) => {
+      if(entries[0].isIntersecting){
+        document.querySelectorAll('.stat-num').forEach(animarContador);
+        statsObserver.unobserve(statsSection);
       }
-    });
-  }, { threshold: 0.4 });
-  document.querySelectorAll('.stat-num').forEach(el => statsObserver.observe(el));
+    }, { threshold: 0.3 });
+    statsObserver.observe(statsSection);
+  }
 
-  // ---- Acordeón de preguntas frecuentes ----
+  // ---- Cabecera pegajosa avanzada ----
+  const headerEl = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    if(headerEl) headerEl.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // ---- Acordeón de FAQs ----
   document.querySelectorAll('.faq-q').forEach(btn => {
     btn.addEventListener('click', () => {
-      const item = btn.closest('.faq-item');
-      const answer = item.querySelector('.faq-a');
+      const item = btn.parentElement;
       const isOpen = item.classList.contains('open');
-
-      document.querySelectorAll('.faq-item.open').forEach(openItem => {
-        openItem.classList.remove('open');
-        openItem.querySelector('.faq-a').style.maxHeight = null;
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-a').style.maxHeight = null;
       });
-
-      if (!isOpen) {
+      if(!isOpen) {
         item.classList.add('open');
-        answer.style.maxHeight = answer.scrollHeight + 'px';
+        const ans = item.querySelector('.faq-a');
+        ans.style.maxHeight = ans.scrollHeight + "px";
       }
     });
   });
 
   // ==================================================================
-  // CONEXIÓN A SUPABASE — base de datos + login de administrador
-  // Reemplaza estos dos valores con los de tu propio proyecto Supabase:
-  // Settings → API → Project URL / anon public key
+  // INTEGRACIÓN CON BASE DE DATOS SUPABASE (MÓDULO SEGURO)
   // ==================================================================
   try {
     const SUPABASE_URL = 'https://ghcvqyuoscyfbuhxosjq.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdoY3ZxeXVvc2N5ZmJ1aHhvc2pxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMzMDUwODksImV4cCI6MjA5ODg4MTA4OX0.RXYpw12Gb1rrBAq3ChyrhQBLPjz0rCgqzwBqeJCTcPA';
-
+    
     if (typeof window.supabase === 'undefined') {
-      throw new Error('El script de Supabase no cargó (revisa tu conexión o bloqueador de anuncios).');
+      throw new Error('Script remoto no disponible.');
     }
     const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-    // Número de WhatsApp del negocio: código de país (52 para México) + número a 10 dígitos, sin espacios ni signos
     const WHATSAPP_NUMBER = NEGOCIO_WHATSAPP;
 
-    // ---- Formulario de contacto: guarda el mensaje en la base de datos y abre WhatsApp ----
+    // Formulario de Envío
     document.getElementById('contactForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       const btn = e.target.querySelector('button[type="submit"]');
@@ -1392,29 +1403,28 @@
       const mensaje = document.getElementById('mensaje').value.trim();
 
       btn.disabled = true;
-      btn.textContent = 'Enviando...';
+      btn.textContent = 'Procesando en Taller...';
 
       try {
         const { error } = await supabase.from('mensajes').insert([{ nombre, correo, mensaje }]);
         if (error) throw error;
-
-        note.textContent = `Gracias, ${nombre.split(' ')[0]} — tu mensaje quedó guardado. Abrimos WhatsApp para que nos escribas directo.`;
-
-        const textoWhatsapp = `Hola, soy ${nombre}. Mi correo es ${correo}. Mi mensaje: ${mensaje}`;
+        
+        note.textContent = `Atendido, ${nombre.split(' ')[0]} — Tu solicitud fue registrada con éxito. Redirigiendo a canal de WhatsApp directo...`;
+        const textoWhatsapp = `Hola Roble Muebles, soy ${nombre}. Acabo de registrar mi correo (${correo}) en su web. Proyecto: ${mensaje}`;
         const urlWhatsapp = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(textoWhatsapp)}`;
+        
         window.open(urlWhatsapp, '_blank');
-
         e.target.reset();
       } catch (err) {
-        console.error('Error al guardar mensaje:', err);
-        note.textContent = 'Hubo un problema al enviar tu mensaje. Intenta de nuevo en un momento.';
+        console.error(err);
+        note.textContent = 'Ocurrió un retardo en el servidor. Por favor, reintenta o escríbenos directamente vía WhatsApp.';
       }
       note.classList.add('show');
       btn.disabled = false;
-      btn.textContent = 'Enviar mensaje';
+      btn.textContent = 'Enviar a Taller';
     });
 
-    // ---- Abrir panel: revisa si ya hay sesión iniciada ----
+    // Eventos del Panel Administrativo
     document.getElementById('openPanel').addEventListener('click', async (e) => {
       e.preventDefault();
       document.getElementById('panelOverlay').classList.add('open');
@@ -1426,64 +1436,61 @@
         } else {
           mostrarLogin();
         }
-      } catch (err) {
-        console.error('Error revisando sesión:', err);
-        mostrarLogin();
-      }
+      } catch(err) { console.error(err); }
     });
 
-    document.getElementById('closePanel').addEventListener('click', () => {
+    document.getElementById('panelClose').addEventListener('click', () => {
       document.getElementById('panelOverlay').classList.remove('open');
-    });
-    document.getElementById('panelOverlay').addEventListener('click', (e) => {
-      if (e.target.id === 'panelOverlay') e.target.classList.remove('open');
     });
 
     function mostrarLogin(){
-      document.getElementById('loginBox').style.display = 'block';
-      document.getElementById('panelContent').style.display = 'none';
-    }
-    function mostrarPanel(){
-      document.getElementById('loginBox').style.display = 'none';
-      document.getElementById('panelContent').style.display = 'block';
-    }
-
-    // ---- Login del administrador ----
-    document.getElementById('loginBtn').addEventListener('click', async () => {
-      const email = document.getElementById('loginEmail').value.trim();
-      const password = document.getElementById('loginPassword').value;
-      const errorEl = document.getElementById('loginError');
-
-      try {
+      document.getElementById('panelTable').style.display = 'none';
+      document.getElementById('panelEmpty').style.display = 'none';
+      const body = document.getElementById('panelBody');
+      body.innerHTML = `
+        <div class="login-box">
+          <h4>Autenticación de Administrador</h4>
+          <form id="loginForm">
+            <div class="form-field-light">
+              <label>Correo Institucional</label>
+              <input type="email" id="loginEmail" required>
+            </div>
+            <div class="form-field-light">
+              <label>Clave de Acceso</label>
+              <input type="password" id="loginPass" required>
+            </div>
+            <button type="submit" class="btn btn-dark">Ingresar al Sistema</button>
+            <p class="login-error" id="loginError">Credenciales inválidas.</p>
+          </form>
+        </div>
+      `;
+      
+      document.getElementById('loginForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPass').value;
+        const errorEl = document.getElementById('loginError');
+        
         const { error } = await supabase.auth.signInWithPassword({ email, password });
-        if (error) throw error;
-        errorEl.classList.remove('show');
-        mostrarPanel();
-        cargarMensajes();
-      } catch (err) {
-        console.error('Error de login:', err);
-        errorEl.textContent = err.message || 'Correo o contraseña incorrectos.';
-        errorEl.classList.add('show');
-      }
-    });
+        if (!error) {
+          mostrarPanel();
+          cargarMensajes();
+        } else {
+          errorEl.classList.add('show');
+        }
+      });
+    }
 
-    document.getElementById('logoutBtn').addEventListener('click', async () => {
-      await supabase.auth.signOut();
-      mostrarLogin();
-    });
+    function mostrarPanel(){
+      document.getElementById('panelTable').style.display = 'table';
+    }
 
-    // ---- Cargar y mostrar mensajes (solo si hay sesión) ----
     async function cargarMensajes(){
       try {
-        const { data, error } = await supabase
-          .from('mensajes')
-          .select('*')
-          .order('fecha', { ascending: false });
+        const { data, error } = await supabase.from('mensajes').select('*').order('fecha', { ascending: false });
         if (error) throw error;
         renderPanel(data || []);
-      } catch (err) {
-        console.error('Error cargando mensajes:', err);
-      }
+      } catch (err) { console.error(err); }
     }
 
     function renderPanel(lista){
@@ -1492,89 +1499,96 @@
       document.getElementById('statNuevos').textContent = lista.filter(m => m.estado === 'nuevo').length;
       document.getElementById('statHoy').textContent = lista.filter(m => new Date(m.fecha).toDateString() === hoy).length;
       document.getElementById('panelEmpty').style.display = lista.length ? 'none' : 'block';
-
+      
       document.getElementById('panelBody').innerHTML = lista.map(m => `
         <tr>
-          <td class="mono">${new Date(m.fecha).toLocaleDateString('es-MX', { day:'2-digit', month:'short' })}</td>
-          <td>${m.nombre}</td>
-          <td>${m.correo}</td>
+          <td class="mono" style="font-size:.8rem;">${new Date(m.fecha).toLocaleDateString('es-MX', { day:'2-digit', month:'short' })}</td>
+          <td style="font-weight:600;">${m.nombre}</td>
+          <td><a href="mailto:${m.correo}" style="text-decoration:underline;">${m.correo}</a></td>
           <td class="msg">${m.mensaje}</td>
           <td><span class="badge ${m.estado}" data-id="${m.id}">${m.estado === 'nuevo' ? 'Nuevo' : 'Atendido'}</span></td>
         </tr>
       `).join('');
     }
 
-    // ---- Cambiar estado de un mensaje (Nuevo / Atendido) ----
     document.getElementById('panelBody').addEventListener('click', async (e) => {
       if (!e.target.classList.contains('badge')) return;
       const id = e.target.dataset.id;
-      const nuevoEstado = e.target.textContent.trim() === 'Nuevo' ? 'atendido' : 'nuevo';
+      const actual = e.target.textContent.trim() === 'Nuevo' ? 'atendido' : 'nuevo';
       try {
-        await supabase.from('mensajes').update({ estado: nuevoEstado }).eq('id', id);
+        await supabase.from('mensajes').update({ estado: actual }).eq('id', id);
         cargarMensajes();
-      } catch (err) {
-        console.error('Error actualizando mensaje:', err);
-      }
+      } catch (err) { console.error(err); }
     });
 
   } catch (err) {
-    console.error('No se pudo inicializar el panel de administrador:', err);
+    console.error("Módulo Supabase desvinculado de manera preventiva:", err);
     const openPanelLink = document.getElementById('openPanel');
     if (openPanelLink) {
       openPanelLink.addEventListener('click', (e) => {
         e.preventDefault();
-        alert('El panel de administrador aún no está configurado con tu base de datos.');
+        alert('Consola temporal: Conecta tus claves secretas de Supabase para activar el visor.');
       });
     }
   }
 </script>
 
-<!-- ==================================================================
-     LABORATORIO DE TÉCNICAS: cursor personalizado, botones magnéticos,
-     scroll con inercia (Lenis), texto revelado por palabra y cortina
-     de fotos. Todo aislado en su propio bloque para no chocar con
-     nada de arriba.
-================================================================== -->
 <script>
-  // ---- 1) Cursor personalizado (solo si el dispositivo tiene mouse real) ----
   const isFinePointer = window.matchMedia('(pointer: fine)').matches;
   if (isFinePointer) {
     document.body.classList.add('has-custom-cursor');
-    const cursorDot = document.getElementById('cursorDot');
-    const cursorRing = document.getElementById('cursorRing');
-    let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
-    let ringX = mouseX, ringY = mouseY;
+    const cursorDot = document.createElement('div');
+    cursorDot.className = 'cursor-dot';
+    const cursorRing = document.createElement('div');
+    cursorRing.className = 'cursor-ring';
+    document.body.appendChild(cursorDot);
+    document.body.appendChild(cursorRing);
+
+    let mouseX = 0, mouseY = 0;
+    let dotX = 0, dotY = 0;
+    let ringX = 0, ringY = 0;
 
     window.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX; mouseY = e.clientY;
-      cursorDot.style.left = mouseX + 'px';
-      cursorDot.style.top = mouseY + 'px';
-      document.body.classList.remove('cursor-hidden');
+      mouseX = e.clientX;
+      mouseY = e.clientY;
     });
+
+    function tickCursor() {
+      dotX += (mouseX - dotX) * 0.3;
+      dotY += (mouseY - dotY) * 0.3;
+      ringX += (mouseX - ringX) * 0.15;
+      ringY += (mouseY - ringY) * 0.15;
+
+      cursorDot.style.left = `${dotX}px`;
+      cursorDot.style.top = `${dotY}px`;
+      cursorRing.style.left = `${ringX}px`;
+      cursorRing.style.top = `${ringY}px`;
+
+      requestAnimationFrame(tickCursor);
+    }
+    requestAnimationFrame(tickCursor);
+
     document.addEventListener('mouseleave', () => document.body.classList.add('cursor-hidden'));
+    document.addEventListener('mouseenter', () => document.body.classList.remove('cursor-hidden'));
 
-    (function cursorRaf(){
-      ringX += (mouseX - ringX) * 0.18;
-      ringY += (mouseY - ringY) * 0.18;
-      cursorRing.style.left = ringX + 'px';
-      cursorRing.style.top = ringY + 'px';
-      requestAnimationFrame(cursorRaf);
-    })();
-
-    // El anillo crece sobre elementos interactivos
     document.querySelectorAll('a, button, .card, input, textarea, .filter-btn').forEach(el => {
       el.addEventListener('mouseenter', () => cursorRing.classList.add('grow'));
       el.addEventListener('mouseleave', () => cursorRing.classList.remove('grow'));
     });
 
-    // El cursor cambia a blanco sobre fondos oscuros
     document.querySelectorAll('.contacto, .stats, .marquee-strip, .panel-overlay').forEach(el => {
-      el.addEventListener('mouseenter', () => { cursorDot.classList.add('on-dark'); cursorRing.classList.add('on-dark'); });
-      el.addEventListener('mouseleave', () => { cursorDot.classList.remove('on-dark'); cursorRing.classList.remove('on-dark'); });
+      el.addEventListener('mouseenter', () => {
+        cursorDot.classList.add('on-dark');
+        cursorRing.classList.add('on-dark');
+      });
+      el.addEventListener('mouseleave', () => {
+        cursorDot.classList.remove('on-dark');
+        cursorRing.classList.remove('on-dark');
+      });
     });
   }
 
-  // ---- 2) Botones magnéticos: siguen un poco al cursor cuando están cerca ----
+  // ---- Botones Magnéticos ----
   function initMagnetic(el, strength = 0.35, max = 14){
     el.addEventListener('mousemove', (e) => {
       const r = el.getBoundingClientRect();
@@ -1584,44 +1598,39 @@
       y = Math.max(-max, Math.min(max, y));
       el.style.transform = `translate(${x}px, ${y}px)`;
     });
-    el.addEventListener('mouseleave', () => { el.style.transform = ''; });
-  }
-  if (isFinePointer) {
-    document.querySelectorAll('.btn, .filter-btn').forEach(el => initMagnetic(el));
-  }
-
-  // ---- 3) Scroll con inercia (Lenis), enganchado a los enlaces con # ----
-  if (typeof Lenis !== 'undefined') {
-    const lenis = new Lenis({
-      duration: 1.1,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    el.addEventListener('mouseleave', () => {
+      el.style.transform = '';
     });
-    function lenisRaf(time){ lenis.raf(time); requestAnimationFrame(lenisRaf); }
-    requestAnimationFrame(lenisRaf);
+  }
+  document.querySelectorAll('.btn, .whatsapp-float, .to-top, .filter-btn').forEach(b => initMagnetic(b));
 
-    document.querySelectorAll('a[href^="#"]').forEach(link => {
-      link.addEventListener('click', (e) => {
-        const id = link.getAttribute('href');
-        if (id.length > 1) {
-          const target = document.querySelector(id);
-          if (target) { e.preventDefault(); lenis.scrollTo(target, { offset: -20 }); }
-        }
+  // ---- Desplazamiento Suave (Lenis Inercia) ----
+  try {
+    const lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const t = document.querySelector(this.getAttribute('href'));
+        if(t) lenis.scrollTo(t);
       });
     });
-  } else {
-    console.warn('Lenis no cargó — el scroll sigue funcionando normal, solo sin la inercia extra.');
-  }
+  } catch(e) { console.log('Lenis no inicializado.'); }
 
-  // ---- 4) Texto revelado por palabra (solo en encabezados de texto plano) ----
-  function splitWords(el){
-    Array.from(el.childNodes).forEach(node => {
-      if (node.nodeType === 3 && node.textContent.trim().length) {
+  // ---- Revelado de Texto Avanzado ----
+  function splitWords(el) {
+    const nodes = Array.from(el.childNodes);
+    nodes.forEach(node => {
+      if (node.nodeType === Node.TEXT_NODE) {
+        const text = node.textContent.trim();
+        if (!text) return;
         const frag = document.createDocumentFragment();
-        node.textContent.split(/(\s+)/).forEach(chunk => {
-          if (!chunk.length) return;
-          if (/^\s+$/.test(chunk)) {
-            frag.appendChild(document.createTextNode(chunk));
-          } else {
+        text.split(/\s+/).forEach(chunk => {
+          if(chunk){
             const wrap = document.createElement('span');
             wrap.className = 'split-word';
             const inner = document.createElement('span');
@@ -1632,24 +1641,24 @@
         });
         el.replaceChild(frag, node);
       }
-      // los elementos hijos (em, br, etc.) se dejan intactos, sin dividir
     });
   }
   document.querySelectorAll('.split-text').forEach(h => {
     splitWords(h);
-    h.querySelectorAll('.split-word').forEach((w, i) => { w.style.transitionDelay = (i * 45) + 'ms'; });
+    h.querySelectorAll('.split-word span').forEach((w, i) => { w.style.transitionDelay = (i * 45) + 'ms'; });
   });
+  
   const splitObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.querySelectorAll('.split-word').forEach(w => w.classList.add('in'));
+        entry.target.querySelectorAll('.split-word span').forEach(w => w.classList.add('in'));
         splitObserver.unobserve(entry.target);
       }
     });
   }, { threshold: 0.4 });
   document.querySelectorAll('.split-text').forEach(h => splitObserver.observe(h));
 
-  // ---- 5) Cortina de revelado sobre las fotos del hero y del proceso ----
+  // ---- Cortinas en Imágenes ----
   const curtainObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -1658,7 +1667,7 @@
       }
     });
   }, { threshold: 0.3 });
-  document.querySelectorAll('.curtain').forEach(el => curtainObserver.observe(el));
+  document.querySelectorAll('.curtain').forEach(c => curtainObserver.observe(c));
 </script>
 
 </body>
